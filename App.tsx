@@ -1582,12 +1582,12 @@ const App: React.FC = () => {
 
               {/* Row 1: Gallery 1 */}
               <BentoCard noPadding className="col-span-6 md:col-span-2 h-[220px]">
-                <img src="/src/assets/images/regenerated_image_1778557222201.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
+                <img src="/src/assets/images/prof2.jpeg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
               </BentoCard>
 
               {/* Row 1: Gallery 2 */}
               <BentoCard noPadding className="col-span-6 md:col-span-2 h-[220px]">
-                <img src="/src/assets/images/regenerated_image_1778557476458.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
+                <img src="/src/assets/images/Ghost.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
               </BentoCard>
 
               {/* Row 1: Socials Grid */}
