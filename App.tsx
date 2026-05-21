@@ -982,6 +982,14 @@ const OtherProjectModal: React.FC<{
               {/* Content Sections */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
                 <div className="md:col-span-8 space-y-20">
+                  {/* Project Overview */}
+                  <section>
+                    <h3 className="text-2xl font-bold text-white mb-6 font-display">Overview</h3>
+                    <p className="text-lg text-white/70 leading-relaxed font-light mb-8">
+                      {project.description}
+                    </p>
+                  </section>
+
                   {/* Overview Image (Main Banner) */}
                   {project.overviewImageUrl && (
                     <div 
@@ -995,35 +1003,6 @@ const OtherProjectModal: React.FC<{
                       />
                     </div>
                   )}
-
-                  {/* Project Overview */}
-                  <section>
-                    <h3 className="text-2xl font-bold text-white mb-6 font-display">Overview</h3>
-                    <p className="text-lg text-white/70 leading-relaxed font-light mb-8">
-                      {project.description}
-                    </p>
-                    {project.designMainImage && (
-                      <div 
-                        onClick={() => {
-                          if (!project.designMainImage?.endsWith('.mp4')) onExpandImage(project.designMainImage!);
-                        }}
-                        className={`aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl group ${project.designMainImage.endsWith('.mp4') ? '' : 'cursor-zoom-in'}`}
-                      >
-                        {project.designMainImage.endsWith('.mp4') ? (
-                          <video 
-                            src={project.designMainImage} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                            autoPlay 
-                            loop 
-                            muted 
-                            playsInline
-                          />
-                        ) : (
-                          <img src={project.designMainImage} alt="Final Design" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        )}
-                      </div>
-                    )}
-                  </section>
 
                   {/* Problem */}
                   <section>
@@ -1145,9 +1124,25 @@ const OtherProjectModal: React.FC<{
                         )}
                       </div>
                     )}
-                    {project.designMainImage && project.designMainImage !== project.overviewImageUrl && (
-                      <div className="hidden border-t border-white/5 pt-8">
-                         {/* Placeholder to avoid breaking layout if needed elsewhere */}
+                    {project.designMainImage && (
+                      <div 
+                        onClick={() => {
+                          if (!project.designMainImage?.endsWith('.mp4')) onExpandImage(project.designMainImage!);
+                        }}
+                        className={`aspect-video w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl group ${project.designMainImage.endsWith('.mp4') ? '' : 'cursor-zoom-in'}`}
+                      >
+                        {project.designMainImage.endsWith('.mp4') ? (
+                          <video 
+                            src={project.designMainImage} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            autoPlay 
+                            loop 
+                            muted 
+                            playsInline
+                          />
+                        ) : (
+                          <img src={project.designMainImage} alt="Final Design" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        )}
                       </div>
                     )}
                   </section>
