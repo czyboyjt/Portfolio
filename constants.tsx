@@ -126,7 +126,7 @@ export const PROJECTS: Project[] = [
     researchImage2: '/images/TalComp.png',
     researchImage2Label: 'Competitive Analysis',
     researchCarousel: [
-      { url: 'public/images/TLit.png', label: 'Literature Review' },
+      { url: '/images/TLit.png', label: 'Literature Review' },
     ],
     year: '2026',
     duration: 'Ongoing',
