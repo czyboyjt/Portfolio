@@ -1369,37 +1369,6 @@ const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
 
                 {/* Experience & Freelance */}
                 <div className="max-w-3xl space-y-16">
-                  {/* Timeline - Streamlined Sequential Layout */}
-                  <div>
-                    <div className="flex items-center gap-4 mb-10">
-                      <span className="text-[11px] font-black tracking-[0.4em] uppercase text-white/50 font-sans whitespace-nowrap">Experience</span>
-                      <div className="h-[1px] flex-1 bg-white/10"></div>
-                    </div>
-                    
-                    <div className="space-y-12 relative">
-                      {/* Vertical Line */}
-                      <div className="absolute left-[7px] top-2 bottom-2 w-[1px] bg-white/10"></div>
-
-                      {timeline.map((item, i) => (
-                        <div key={i} className="relative pl-10 group/item">
-                          {/* Dot */}
-                          <div className="absolute left-0 top-2 w-4 h-4 rounded-full border-2 border-white/60 bg-white/10 z-10 group-hover/item:scale-125 transition-transform duration-300 shadow-[0_0_15px_rgba(255,255,255,0.15)] backdrop-blur-md"></div>
-                          
-                          <div className="flex flex-col gap-1">
-                            <div className="flex flex-wrap items-baseline gap-x-3">
-                              <h3 className="text-lg font-bold text-white font-display group-hover/item:text-white/90 transition-colors">{item.role}</h3>
-                              <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest font-sans">{item.year}</span>
-                            </div>
-                            <span className="text-sm font-medium text-white/60">{item.company}</span>
-                            <p className="text-sm text-white/70 leading-relaxed mt-2 max-w-xl">
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
                   {/* Freelance Section */}
                   <div>
                     <div className="flex items-center gap-4 mb-10">
