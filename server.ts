@@ -1,14 +1,20 @@
 import express from 'express';
-import { createServer as createViteServer } from 'vite';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { GoogleGenAI } from '@google/genai';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+let genAIClient: GoogleGenAI | null = null;
+function getGenAI(): GoogleGenAI | null {
+  const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
+  if (!apiKey) return null;
+  if (!genAIClient) {
+    genAIClient = new GoogleGenAI({ apiKey });
+  }
+  return genAIClient;
+}
 
 async function startServer() {
   const app = express();
@@ -17,13 +23,54 @@ async function startServer() {
   app.use(express.json());
   app.use(cookieParser());
 
+  // Health check endpoint
+  app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok' });
+  });
+
+  // AI Consultation endpoint (server-side Gemini)
+  app.post('/api/ai/consultation', async (req, res) => {
+    try {
+      const { messages } = req.body;
+      const ai = getGenAI();
+      if (!ai) {
+        return res.json({ reply: "Gemini API key is not configured yet. Please configure GEMINI_API_KEY in settings." });
+      }
+
+      const history = Array.isArray(messages)
+        ? messages.map((msg: any) => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`).join('\n')
+        : '';
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: `Previous Conversation:\n${history}\n\nNew Request: Based on the system goals, please respond to the latest user message.`,
+        config: {
+          systemInstruction: `You are "UX Mind", an elite AI UX Strategy Assistant embedded in the portfolio of a world-class UX Designer.
+Your goal is to help visitors understand the Designer's value and brainstorm UX solutions.
+
+Guidelines:
+- Keep responses concise, professional, and insightful.
+- Use UX terminology correctly (e.g., heuristics, cognitive load, information architecture).
+- Focus on user-centric solutions.
+- If asked about the designer, emphasize their focus on minimalism, user research, and data-driven design.
+- If a user provides a business problem, offer 2-3 high-level UX strategy suggestions.
+- Be encouraging and visionary.`,
+          temperature: 0.8,
+          topP: 0.95,
+        },
+      });
+
+      res.json({ reply: response.text || "I'm having trouble thinking of a response right now. Let's try again in a moment." });
+    } catch (err: any) {
+      console.error('Gemini Consultation Error:', err);
+      res.status(500).json({ error: 'Failed to generate consultation response' });
+    }
+  });
+
   const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
   const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
   const getRedirectUri = (req: express.Request) => {
-    // In our environment, we use the APP_URL provided by the user
-    // or we can use the origin from the request if it's reliable.
-    // The instructions say use APP_URL env var if available.
     const origin = process.env.APP_URL || `${req.protocol}://${req.get('host')}`;
     return `${origin}/api/auth/spotify/callback`;
   };
@@ -183,17 +230,19 @@ async function startServer() {
     }
   });
 
-  // Vite middleware for development
+  // Vite middleware for development vs static serve for production
   if (process.env.NODE_ENV !== 'production') {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
     });
     app.use(vite.middlewares);
   } else {
-    app.use(express.static(path.join(__dirname, 'dist')));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    const distPath = path.join(process.cwd(), 'dist');
+    app.use(express.static(distPath));
+    app.use((req, res) => {
+      res.sendFile(path.join(distPath, 'index.html'));
     });
   }
 
@@ -203,3 +252,4 @@ async function startServer() {
 }
 
 startServer();
+

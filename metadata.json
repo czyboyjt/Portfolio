@@ -1,5 +1,8 @@
 {
   "name": "UX Portfolio",
   "description": "A minimalist, dark-themed UX portfolio featuring glassmorphic design and sleek project archives.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
