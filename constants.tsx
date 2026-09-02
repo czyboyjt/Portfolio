@@ -10,17 +10,17 @@ export const PROJECTS: Project[] = [
     description: 'Building an In-House Mental Health Platform',
     imageUrl: '/images/videos/InterVid.mp4',
     previewVideoUrl: '/images/videos/InterVid.mp4',
-    overviewImageUrl: '/images/IScattered.png',
+    overviewImageUrl: '/images/IScattered.webp',
     researchImage1: [
-      '/images/IPersona1.png',
-      '/images/IPersona2.png'
+      '/images/IPersona1.webp',
+      '/images/IPersona2.webp'
     ],
     researchImage1Label: 'Personas',
-    researchImage2: '/images/IStack.png',
+    researchImage2: '/images/IStack.webp',
     researchImage2Label: 'Ideal Stack',
     researchCarousel: [
-      { url: '/images/Ibpd1.png', label: 'What is BPD' },
-      { url: '/images/Ibpd2.jpg', label: 'What is BPD' }
+      { url: '/images/Ibpd1.webp', label: 'What is BPD' },
+      { url: '/images/Ibpd2.webp', label: 'What is BPD' }
     ],
     year: '2025',
     duration: 'Ongoing',
@@ -72,38 +72,38 @@ export const PROJECTS: Project[] = [
       {
         title: 'Roadmapping & Planning',
         subtitle: 'From structure to scale.',
-        imageUrl: '/images/IRoadmap.png',
+        imageUrl: '/images/IRoadmap.webp',
         ideationText: 'We paired Gantt-based dependency planning with Jira-driven sprint tracking. Required screens were mapped to each sprint, design roadmaps were aligned with engineering timelines, and Kanban boards provided visibility into progress,ensuring teams stayed unblocked and aligned as scope evolved.'
       },
       {
         title: 'Sprint Cycles',
         subtitle: '2 Week Sprints.',
-        imageUrl: '/images/ICycle.png',
+        imageUrl: '/images/ICycle.webp',
         ideationText: 'I designed and owned the design sprint framework, establishing a weekly cadence with clear deliverables, rotating team roles, and sprint-by-sprint screen allocation based on the information architecture. This structure enabled consistent progress, high-quality design critiques, and reliable handoff documentation for engineering.'
 
       },
       {
         title: 'Design Ops',
         subtitle: 'Supporting the systems behind design.',
-        imageUrl: '/images/IDesignOp.png',
+        imageUrl: '/images/IDesignOp.webp',
         ideationText: 'I managed the design team’s workspace by organizing files, maintaining the component library, and ensuring clear documentation. By creating a structured system for assets and facilitating regular communication between designers, I helped the team stay aligned and easily locate the resources they needed as the project evolved.'
       }
     ],
     designRational: 'The visual language was informed by the founder’s existing vision—soft, approachable, and emotionally considerate. Our role was to operationalize that aesthetic into a cohesive, accessible design system that supported clarity without compromising warmth.',
     designTypography: 'Poppins',
-    designMainImage: '/images/Intover.png',
+    designMainImage: '/images/Intover.webp',
     designDetailImage1: [
-      '/images/IDesign1.png',
-      '/images/IDesign2.png',
-      '/images/IDesign3.png',
-      '/images/IDesign4.png',
+      '/images/IDesign1.webp',
+      '/images/IDesign2.webp',
+      '/images/IDesign3.webp',
+      '/images/IDesign4.webp',
     ],
     designDetailImage2: [
-      '/images/IDecision1.png',
-      '/images/IDecision2.png',
-      '/images/IDecision3.png',
+      '/images/IDecision1.webp',
+      '/images/IDecision2.webp',
+      '/images/IDecision3.webp',
     ],
-    designDetailImage3: '/images/integratelogo.jpeg',
+    designDetailImage3: '/images/integratelogo.webp',
     designSystemTitle: 'Custom Component Library',
     designSystemDescription: 'A new component library was created from scratch but was based of the Core Design System.',
     designColorPrimary: '#001C3E',
@@ -117,16 +117,16 @@ export const PROJECTS: Project[] = [
     category: 'Founder • Fitness • AI-Mobile App',
     description: 'A skill-based calisthenics training app with AI coaching, XP progression, and structured skill trees.',
     imageUrl: '/images/videos/TalVid.mp4',
-    overviewImageUrl: '/images/TalProblem.png',
+    overviewImageUrl: '/images/TalProblem.webp',
     researchImage1: [
-      '/images/TalPersona.png',
-      '/images/ChatGPT Image May 16, 2026, 03_02_15 AM.png'
+      '/images/TalPersona.webp',
+      '/images/ChatGPT Image May 16, 2026, 03_02_15 AM.webp'
     ],
     researchImage1Label: 'Personas',
-    researchImage2: '/images/TalComp.png',
+    researchImage2: '/images/TalComp.webp',
     researchImage2Label: 'Competitive Analysis',
     researchCarousel: [
-      { url: 'public/images/TLit.png', label: 'Literature Review' },
+      { url: 'public/images/TLit.webp', label: 'Literature Review' },
     ],
     year: '2026',
     duration: 'Ongoing',
@@ -182,41 +182,41 @@ export const PROJECTS: Project[] = [
     {
       title: 'Product Planning & Feature Prioritization',
       subtitle: 'Defining the MVP experience and roadmap.',
-      imageUrl: '/images/TalPlan.png',
+      imageUrl: '/images/TalPlan.webp',
       ideationText: 'I created product requirement documents (PRDs), used Kano analysis to prioritize features based on user value and complexity, and established the scope for the first version of the app to ensure development stayed focused on the core experience.'
     },
     {
       title: 'Skill Tree & Progression System',
       subtitle: 'Designing the learning framework.',
-      imageUrl: '/images/TalSkill.png',
+      imageUrl: '/images/TalSkill.webp',
       ideationText: 'I researched how calisthenics athletes learn and progress through skills, then translated those insights into a structured skill tree, leveling system, and progression framework that guides users through movements with clear advancement paths and supporting exercises (Picture is not mine but used as a reference).'
     },
     {
       title: 'Backend Architecture & API Integration',
       subtitle: 'Building the technical foundation.',
-      imageUrl: '/images/TalBack.png',
+      imageUrl: '/images/TalBack.webp',
       ideationText: 'I structured the backend architecture using Supabase & SQL to manage user, workout, and progression data while integrating external APIs to power AI coaching, personalized recommendations, and dynamic training experiences.'
     },
     {
       title: 'Design + Development Execution',
       subtitle: 'From Figma to functional MVP.',
-      imageUrl: '/images/TalDD.png',
+      imageUrl: '/images/TalDD.webp',
       ideationText: 'I designed the interface in Figma before developing the application using Claude Code, iterating rapidly through AI-assisted development while testing and refining the experience directly in Xcode to deliver a functional mobile MVP.'
     }
     ],
     designRational: 'The visual direction centered on creating a premium, cinematic experience inspired by themes of evolution, mastery, and personal growth. Classical statue imagery was used to abstract the athlete experience away from specific individuals, making progression feel more timeless, aspirational, and personally adaptable to each user.',
     designTypography: 'Outfit',
-    designMainImage: '/images/TalOver.png',
+    designMainImage: '/images/TalOver.webp',
     designDetailImage1: [
-      '/images/TalD1.png',
-      '/images/TalD2.png',
-      '/images/TalD3.png',
-      '/images/TalD4.png'
+      '/images/TalD1.webp',
+      '/images/TalD2.webp',
+      '/images/TalD3.webp',
+      '/images/TalD4.webp'
     ],
     designDetailImage2: [
-      '/images/TalosDesign2.png'
+      '/images/TalosDesign2.webp'
     ],
-    designDetailImage3: '/images/TalosIcon.png',
+    designDetailImage3: '/images/TalosIcon.webp',
     designSystemTitle: 'Custom UI Component',
     designSystemDescription: 'I built a custom design system for Talos.',
     designColorPrimary: '#3B3B37',
@@ -231,20 +231,20 @@ export const PROJECTS: Project[] = [
     description: 'Transforming navigation with structured tagging.',
     imageUrl: '/images/videos/Markvid.mp4',
     previewVideoUrl: '/images/videos/Markvid.mp4',
-    overviewImageUrl: '/images/Msort.jpg',
+    overviewImageUrl: '/images/Msort.webp',
     researchImage1: [
-      '/images/MPersona 1.png',
-      '/images/MPersona 2.png',
-      '/images/MPersona 3.png',
+      '/images/MPersona 1.webp',
+      '/images/MPersona 2.webp',
+      '/images/MPersona 3.webp',
       
     ],
     researchImage1Label: 'Personas',
-    researchImage2: '/images/MTesting.png',
+    researchImage2: '/images/MTesting.webp',
     researchImage2Label: 'Usability Testing',
     researchCarousel: [
-      { url: '/images/MComp1.png', label: 'Competitive Audit: MailChimp' },
-      { url: '/images/MComp2.png', label: 'Competitive Audit: Omnisend' },
-      { url: '/images/MComp3.png', label: 'Competitive Audit: ClickUp' }
+      { url: '/images/MComp1.webp', label: 'Competitive Audit: MailChimp' },
+      { url: '/images/MComp2.webp', label: 'Competitive Audit: Omnisend' },
+      { url: '/images/MComp3.webp', label: 'Competitive Audit: ClickUp' }
     ],
     year: '2023',
     duration: '8 Months',
@@ -294,34 +294,34 @@ export const PROJECTS: Project[] = [
       {
         title: 'Feature Prioritization',
         subtitle: 'Maximizing impact',
-        imageUrl: '/images/MCow.png',
+        imageUrl: '/images/MCow.webp',
         ideationText: 'We applied the Kano Method to prioritize the tag features that would drive the most user value.'
       },
       {
         title: 'User Flow',
         subtitle: 'Streamlining content discovery',
-        imageUrl: '/images/MFlow.png',
+        imageUrl: '/images/MFlow.webp',
         ideationText: 'We designed user flows that streamlined how clients tagged, grouped, and searched for content—making navigation faster, clearer, and more consistent.'
       },
       {
         title: 'Wireframing & Prototyping',
         subtitle: 'Getting it to the users',
-        imageUrl: '/images/Mwire.png',
+        imageUrl: '/images/Mwire.webp',
         ideationText: 'Because we leveraged an existing component library, we were able to rapidly translate workflows into low-fidelity wireframes and interactive prototypes. This speed allowed us to quickly validate the tagging experience with users and iterate early before moving into full implementation.'
       },
     ],
     designRational: 'The founder had a clear visual direction centered on a clean, polished SaaS aesthetic. We built within an existing design system to maintain consistency and usability as the platform evolved.',
     designTypography: 'Inter',
-    designMainImage: '/images/MD1.png',
+    designMainImage: '/images/MD1.webp',
     designDetailImage1: [
-      '/images/MD1.png'
+      '/images/MD1.webp'
     ],
     designDetailImage2: [
-      '/images/Mdesign.png',
-      '/images/Mdesign2.png',
-      '/images/Mdesign3.png',
+      '/images/Mdesign.webp',
+      '/images/Mdesign2.webp',
+      '/images/Mdesign3.webp',
     ],
-        designDetailImage3: '/images/Micon.png',
+        designDetailImage3: '/images/Micon.webp',
     designSystemTitle: 'Untitled UI Library',
     designSystemDescription: 'We leveraged the Untitled UI design system to maintain a clean, modern, and highly polished interface.',
     designColorPrimary: '#306CFE',
@@ -336,18 +336,18 @@ export const PROJECTS: Project[] = [
     description: 'Reimagining the college admissions system through gamification & personalization',
     imageUrl: '/images/videos/SeeVid.mp4',
     previewVideoUrl:'/images/videos/SeeVid.mp4',
-    overviewImageUrl: '/images/Supplement.png',
+    overviewImageUrl: '/images/Supplement.webp',
     researchImage1: [
-      '/images/SPersona 1.png',
-      '/images/SPersona 2.png',
+      '/images/SPersona 1.webp',
+      '/images/SPersona 2.webp',
     ],
     researchImage1Label: 'Personas',
-    researchImage2: '/images/Graph 2026-03-06 at 3.25.21 AM.png',
+    researchImage2: '/images/Graph 2026-03-06 at 3.25.21 AM.webp',
     researchImage2Label: 'Secondary Research',
     researchCarousel: [
-      { url: '/images/SComp1.png', label: 'Competitive Audit: Naviance' },
-      { url: '/images/SComp2.png', label: 'Competitive Audit: CollegeLeaps' },
-      { url: '/images/SComp3.png', label: 'Competitive Audit: RaiseMe' }
+      { url: '/images/SComp1.webp', label: 'Competitive Audit: Naviance' },
+      { url: '/images/SComp2.webp', label: 'Competitive Audit: CollegeLeaps' },
+      { url: '/images/SComp3.webp', label: 'Competitive Audit: RaiseMe' }
     ],
     year: '2023',
     duration: '6 Months',
@@ -397,37 +397,37 @@ export const PROJECTS: Project[] = [
       {
         title: 'Information Architecture',
         subtitle: 'Organizing the information',
-        imageUrl: '/images/infoarchSeer.png',
+        imageUrl: '/images/infoarchSeer.webp',
         ideationText: 'Our goal was simplicity and ease of use so we aimed to we design an information hierarchy that transformed a complex process into clear, step-by-step pathways.'
       },
       {
         title: 'Wireframing',
         subtitle: 'Focusing on function',
-        imageUrl: '/images/WireframSeer.png',
+        imageUrl: '/images/WireframSeer.webp',
         ideationText: 'Low-fidelity wireframes helped us validate structure and flow, ensuring students always had a clear next step.'
       },
       {
         title: 'Revisions',
         subtitle: 'Iterating on the initial concept',
-        imageUrl: '/images/SRevision.png',
+        imageUrl: '/images/SRevision.webp',
         ideationText: 'The original product owner had early design concepts in place. After usability testing and rescoping discussions, I revised the designs to improve clarity, usability, and overall flow for students navigating the platform.'
       },
     ],
     designRational: 'The founder wanted this aimed at a younger audience, he said he was aiming for a Whimsical and Magical. He gave Duolingo as an application to based the designs on. Thus I went with a very stylized art style, with “The Magician” as our version of Duo.',
     designTypography: 'Jost',
-    designMainImage: '/images/see1.png',
+    designMainImage: '/images/see1.webp',
     designDetailImage1: [
-      '/images/Sdesign1.png',
-      '/images/Sdesign2.png',
-      '/images/Sdesign3.png',
-      '/images/Sdesign4.png'
+      '/images/Sdesign1.webp',
+      '/images/Sdesign2.webp',
+      '/images/Sdesign3.webp',
+      '/images/Sdesign4.webp'
     ],
     designDetailImage2: [
-      '/images/SDecision1.png',
-      '/images/SDecision2.png',
-      '/images/SDecision3.png'
+      '/images/SDecision1.webp',
+      '/images/SDecision2.webp',
+      '/images/SDecision3.webp'
     ],
-    designDetailImage3: '/images/SBanner.png',
+    designDetailImage3: '/images/SBanner.webp',
     designSystemTitle: 'Custom Component Library',
     designSystemDescription: 'A new component library was created from scratch but was based of the Material UI System.',
     designColorPrimary: '#5e90fb',
@@ -456,16 +456,16 @@ export const SIDE_PROJECTS: Project[] = [
     solution: 'To simplify restaurant decision-making, I designed an app focused on two core features: personalized food recommendations based on each user’s ingredient and taste preferences, and a community review system that surfaces opinions from users with similar tastes.',
     reflection: 'This project strengthened my ability to translate research into product decisions by using methods like user interviews, A/B testing, and SPSS analysis to better understand user behavior and validate design choices.',
     conclusion: 'By combining personalized recommendations with socially relevant reviews, the app helps users feel more informed and confident when exploring new restaurants.',
-    overviewImageUrl: '/images/MTbanner.png',
+    overviewImageUrl: '/images/MTbanner.webp',
     externalUrl: 'https://example.com/mytaste-casestudy',
-    researchImage1: '/images/Story.png',
-    researchImage2: '/images/CompA.png',
-    researchImage3: '/images/Journey.png',
-    solutionImage: '/images/Branding.png',
+    researchImage1: '/images/Story.webp',
+    researchImage2: '/images/CompA.webp',
+    researchImage3: '/images/Journey.webp',
+    solutionImage: '/images/Branding.webp',
     designMainImage: '/images/videos/MTVid2.mp4',
     designDetailImage1: [
-      '/images/Moc2.png',
-      '/images/MU1.png'
+      '/images/Moc2.webp',
+      '/images/MU1.webp'
     ]
   },
     {
@@ -473,7 +473,7 @@ export const SIDE_PROJECTS: Project[] = [
     title: 'GMC Interface',
     category: 'School Project • Automotive • UI/UX',
     description: 'Redesigning the GMC Sierra AT4.',
-    imageUrl: '/images/GMDesign3.png',
+    imageUrl: '/images/GMDesign3.webp',
     previewVideoUrl:'/images/videos/GMC2.mp4',
     duration: 'Jan - May 2026',
     role: 'UX/UI Designer ',
@@ -485,15 +485,15 @@ export const SIDE_PROJECTS: Project[] = [
     solution: 'We designed an intelligent, activity-aware system that adapts power usage, physical truck features, and the interface adjusts based on the context.',
     reflection: 'Designing for GM’s EV truck experience taught me how to balance innovation with real-world constraints, a mindset that continues to shape how I approach product building across different domains.',
     conclusion: 'By introducing adaptive, context-aware modes like Outdoor Mode, the truck evolves into an intelligent platform that responds to user needs in any environment.',
-    overviewImageUrl: '/images/GMover.jpeg',
-    researchImage1: '/images/GMR1.png',
-    researchImage2: '/images/GMR3.png',
-    researchImage3: '/images/Gscenario.png',
-    solutionImage: '/images/GMSolution.png',
+    overviewImageUrl: '/images/GMover.webp',
+    researchImage1: '/images/GMR1.webp',
+    researchImage2: '/images/GMR3.webp',
+    researchImage3: '/images/Gscenario.webp',
+    solutionImage: '/images/GMSolution.webp',
     designMainImage: '/images/videos/GMC3.mp4',
     designDetailImage1: [
-      '/images/GMDesign1.png',
-      '/images/GMDesign3.png'
+      '/images/GMDesign1.webp',
+      '/images/GMDesign3.webp'
     ]
   },
     {
@@ -514,14 +514,14 @@ export const SIDE_PROJECTS: Project[] = [
     reflection: 'This project strengthened my ability to collaborate with stakeholders by learning how to communicate technical ideas in a clear, accessible way while balancing project goals with realistic scope and development constraints.',
     conclusion: 'The final experience created a more engaging and accessible way for festival visitors to explore Polish heritage, ultimately earning first place recognition and an award for its impact, innovation, and cultural storytelling.',
     overviewImageUrl: '/images/MuskOver.webp',
-    researchImage1: '/images/MuskR3.png',
-    researchImage2: '/images/MuskR1.png',
-    researchImage3: '/images/MuskR2.png',
-    solutionImage: '/images/Musksol.png',
+    researchImage1: '/images/MuskR3.webp',
+    researchImage2: '/images/MuskR1.webp',
+    researchImage3: '/images/MuskR2.webp',
+    solutionImage: '/images/Musksol.webp',
     designMainImage: '/images/videos/MuskegonFilm.mp4',
     designDetailImage1: [
-      '/images/MuskD1.png',
-      '/images/MuskD2.png'
+      '/images/MuskD1.webp',
+      '/images/MuskD2.webp'
     ]
   },
   {
@@ -541,15 +541,15 @@ export const SIDE_PROJECTS: Project[] = [
     solution: 'Twyne simplifies networking through features like AI-powered insights dashboards, coffee chat booking, integrated messaging and video calls, and real-time AI conversation support that suggests discussion topics to help users network with more confidence and ease.',
     reflection: 'This project taught me the importance of clearly defining a focused problem space, as narrowing our scope allowed us to create more intentional features, validate meaningful solutions, and better address real user pain points.',
     conclusion: 'Twyne demonstrates how AI-driven support and streamlined networking tools can make professional connections feel more accessible, structured, and less intimidating for users.',
-    overviewImageUrl: '/images/Project-Slide.png',
-    researchImage1: '/images/Tresearch.png',
-    researchImage2: '/images/TComp.png',
-    researchImage3: '/images/TINfo.png',
-    solutionImage: '/images/Tsolution.png',
+    overviewImageUrl: '/images/Project-Slide.webp',
+    researchImage1: '/images/Tresearch.webp',
+    researchImage2: '/images/TComp.webp',
+    researchImage3: '/images/TINfo.webp',
+    solutionImage: '/images/Tsolution.webp',
     designMainImage: '/images/videos/Twynev2.mp4',
     designDetailImage1: [
-      '/images/HIFI 1.png',
-      '/images/THifi2-1.png'
+      '/images/HIFI 1.webp',
+      '/images/THifi2-1.webp'
     ]
   },
 ];

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Project } from '../types';
 
 interface ProjectCardProps {
@@ -8,25 +8,50 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = React.memo(({ project, onClick }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (isInView) {
+      el.play().catch(() => {});
+    } else {
+      el.pause();
+    }
+  }, [isInView]);
+
   return (
-    <div 
+    <div
       data-cursor="project"
       onClick={() => onClick?.(project)}
       className="group flex flex-col gap-4 cursor-pointer"
     >
       <div className="relative aspect-[16/9] overflow-hidden rounded-[2.5rem] border border-white/5 transition-all duration-700 hover:border-white/20">
         {(project.previewVideoUrl || project.imageUrl?.endsWith('.mp4')) ? (
-          <video 
-            src={project.previewVideoUrl || project.imageUrl} 
+          <video
+            ref={videoRef}
+            src={project.previewVideoUrl || project.imageUrl}
             className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out scale-100 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-            autoPlay 
-            loop 
-            muted 
+            loop
+            muted
             playsInline
+            preload="none"
             poster={!project.imageUrl?.endsWith('.mp4') ? project.imageUrl : undefined}
           />
         ) : (
-          <img 
+          <img loading="lazy" decoding="async" 
             src={project.imageUrl} 
             alt={project.title}
             className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out scale-100 group-hover:scale-105 opacity-90 group-hover:opacity-100"

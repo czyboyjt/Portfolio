@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
         >
           <div className="w-12 h-12 rounded-sm flex items-center justify-center transition-transform group-hover:scale-105 shadow-xl overflow-hidden">
             <img 
-              src="/images/Czyboylogo2.png" 
+              src="/images/Czyboylogo2.webp" 
               alt="Logo" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"

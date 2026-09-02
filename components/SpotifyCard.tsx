@@ -16,7 +16,7 @@ const SpotifyCard: React.FC = () => {
     isPlaying: true,
     title: "Ojos Tristes",
     artist: "The Marías",
-    albumImageUrl: "/images/Marias.png",
+    albumImageUrl: "/images/Marias.webp",
     songUrl: "https://open.spotify.com/track/1DFmBjoeQN9DpOVTEewyx0?si=cdaf99e5151a4f19" 
   };
 

@@ -74,17 +74,18 @@ const ProjectStack: React.FC<ProjectStackProps> = React.memo(({ projects, onProj
                   className={`relative w-full h-full rounded-[2.5rem] overflow-hidden border border-white/20 shadow-2xl cursor-pointer group ${isTop ? 'cursor-pointer' : 'pointer-events-none'}`}
                 >
                   {(project.previewVideoUrl || project.imageUrl?.endsWith('.mp4')) ? (
-                    <video 
-                      src={project.previewVideoUrl || project.imageUrl} 
+                    <video
+                      src={project.previewVideoUrl || project.imageUrl}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      autoPlay 
-                      loop 
-                      muted 
+                      autoPlay={isTop}
+                      loop
+                      muted
                       playsInline
+                      preload={isTop ? 'auto' : 'none'}
                       poster={!project.imageUrl?.endsWith('.mp4') ? project.imageUrl : undefined}
                     />
                   ) : (
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src={project.imageUrl} 
                       alt={project.title} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
