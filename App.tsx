@@ -706,8 +706,10 @@ const App: React.FC = () => {
     setQuoteIndex((prev) => (prev + 1) % QUOTES.length);
   }, [QUOTES.length]);
 
+  const handleLoadingComplete = useCallback(() => setIsLoading(false), []);
+
   if (isLoading) {
-    return <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />;
+    return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
   }
 
   const STACK_TOOLS = [

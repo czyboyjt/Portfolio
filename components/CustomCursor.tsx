@@ -13,7 +13,8 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ currentView }) => {
   // Coordinate tracking
   const mousePos = useRef({ x: 0, y: 0 });
   const ringPos = useRef({ x: 0, y: 0 });
-  
+  const dotScale = useRef(1);
+
   const [hoverType, setHoverType] = useState<'none' | 'ui' | 'project'>('none');
   const [isVisible, setIsVisible] = useState(false);
 
@@ -26,18 +27,25 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ currentView }) => {
       const target = e.target as HTMLElement;
       if (target.closest('[data-cursor="project"]')) {
         setHoverType('project');
+        dotScale.current = 1.5;
       } else if (target.closest('button, a, .cursor-pointer, [class*="cursor-"], input, [role="button"]')) {
         setHoverType('ui');
+        dotScale.current = 1.25;
       } else {
         setHoverType('none');
+        dotScale.current = 1;
       }
     };
 
     const animate = () => {
       // 1. Update Dot (Instant Sync)
       // Note: CSS transition on transform is removed to ensure this is truly instant.
+      // The hover scale is baked into this same transform (rather than a Tailwind
+      // scale-* class) because Tailwind v4 compiles scale-* to the native CSS
+      // `scale` property, which composes with `transform` and would otherwise
+      // multiply this translate distance, offsetting the dot from the mouse.
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0)`;
+        dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) scale(${dotScale.current})`;
       }
 
       // 2. Update Ring (Smooth Lerp)
@@ -89,11 +97,11 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ currentView }) => {
     
     switch (hoverType) {
       case 'project':
-        return `${base} bg-orange-500 scale-150 shadow-[0_0_12px_rgba(249,115,22,1)]`;
+        return `${base} bg-orange-500 shadow-[0_0_12px_rgba(249,115,22,1)]`;
       case 'ui':
-        return `${base} bg-white scale-125 shadow-[0_0_10px_rgba(255,255,255,0.6)]`;
+        return `${base} bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]`;
       default:
-        return `${base} bg-white scale-100 shadow-none`;
+        return `${base} bg-white shadow-none`;
     }
   };
 
