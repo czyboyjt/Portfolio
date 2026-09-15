@@ -166,43 +166,43 @@ export const PROJECTS: Project[] = [
         description: "Talos uses XP, skill levels, streaks, and achievement milestones to reinforce consistent training habits and make progression through calisthenics skills feel rewarding and motivating.",
       }
     ],
-  impactMetric: 'MVP',
-  impactLabel: 'Delivered',
-  primaryImpactLabel: 'Platform Foundation',
-  primaryImpactDescription:
-    'established the first functional marketplace prototype and matching logic to support special-needs caregiving at scale.',
-  impactStats: [
-          { value: 'Ongoing', label: 'Project', description: 'Project is still ongoing and being built so no metrics have been met yet' },
+    impactMetric: 'MVP',
+    impactLabel: 'Delivered',
+    primaryImpactLabel: 'Platform Foundation',
+    primaryImpactDescription:
+      'established the first functional marketplace prototype and matching logic to support special-needs caregiving at scale.',
+    impactStats: [
+      { value: 'Ongoing', label: 'Project', description: 'Project is still ongoing and being built so no metrics have been met yet' },
 
-  ],
+    ],
     reflection: 'Building Talos taught me that AI is most powerful when paired with clear vision and direction, helping accelerate both product ideation and development. The process made me more confident as a product builder by strengthening how I think about systems, planning, and AI-assisted creation rather than just writing code manually.',
     nextSteps: 'The next phase of Talos focuses on continued user testing, expanding the exercise and skill library, enhancing the AI coaching system, and introducing deeper personalization to better adapt training to each individual athlete.',
     processDescription: 'The engineering process leveraged a modern tech stack including Typescript, AI-integrated APIs, Supabase, SQL, and native mobile tools like Capacitor to create a responsive, personalized training experience while balancing UX quality with technical feasibility.',
     processSteps: [
-    {
-      title: 'Product Planning & Feature Prioritization',
-      subtitle: 'Defining the MVP experience and roadmap.',
-      imageUrl: '/images/TalPlan.webp',
-      ideationText: 'I created product requirement documents (PRDs), used Kano analysis to prioritize features based on user value and complexity, and established the scope for the first version of the app to ensure development stayed focused on the core experience.'
-    },
-    {
-      title: 'Skill Tree & Progression System',
-      subtitle: 'Designing the learning framework.',
-      imageUrl: '/images/TalSkill.webp',
-      ideationText: 'I researched how calisthenics athletes learn and progress through skills, then translated those insights into a structured skill tree, leveling system, and progression framework that guides users through movements with clear advancement paths and supporting exercises (Picture is not mine but used as a reference).'
-    },
-    {
-      title: 'Backend Architecture & API Integration',
-      subtitle: 'Building the technical foundation.',
-      imageUrl: '/images/TalBack.webp',
-      ideationText: 'I structured the backend architecture using Supabase & SQL to manage user, workout, and progression data while integrating external APIs to power AI coaching, personalized recommendations, and dynamic training experiences.'
-    },
-    {
-      title: 'Design + Development Execution',
-      subtitle: 'From Figma to functional MVP.',
-      imageUrl: '/images/TalDD.webp',
-      ideationText: 'I designed the interface in Figma before developing the application using Claude Code, iterating rapidly through AI-assisted development while testing and refining the experience directly in Xcode to deliver a functional mobile MVP.'
-    }
+      {
+        title: 'Product Planning & Feature Prioritization',
+        subtitle: 'Defining the MVP experience and roadmap.',
+        imageUrl: '/images/TalPlan.webp',
+        ideationText: 'I created product requirement documents (PRDs), used Kano analysis to prioritize features based on user value and complexity, and established the scope for the first version of the app to ensure development stayed focused on the core experience.'
+      },
+      {
+        title: 'Skill Tree & Progression System',
+        subtitle: 'Designing the learning framework.',
+        imageUrl: '/images/TalSkill.webp',
+        ideationText: 'I researched how calisthenics athletes learn and progress through skills, then translated those insights into a structured skill tree, leveling system, and progression framework that guides users through movements with clear advancement paths and supporting exercises (Picture is not mine but used as a reference).'
+      },
+      {
+        title: 'Backend Architecture & API Integration',
+        subtitle: 'Building the technical foundation.',
+        imageUrl: '/images/TalBack.webp',
+        ideationText: 'I structured the backend architecture using Supabase & SQL to manage user, workout, and progression data while integrating external APIs to power AI coaching, personalized recommendations, and dynamic training experiences.'
+      },
+      {
+        title: 'Design + Development Execution',
+        subtitle: 'From Figma to functional MVP.',
+        imageUrl: '/images/TalDD.webp',
+        ideationText: 'I designed the interface in Figma before developing the application using Claude Code, iterating rapidly through AI-assisted development while testing and refining the experience directly in Xcode to deliver a functional mobile MVP.'
+      }
     ],
     designRational: 'The visual direction centered on creating a premium, cinematic experience inspired by themes of evolution, mastery, and personal growth. Classical statue imagery was used to abstract the athlete experience away from specific individuals, making progression feel more timeless, aspirational, and personally adaptable to each user.',
     designTypography: 'Outfit',
@@ -236,7 +236,7 @@ export const PROJECTS: Project[] = [
       '/images/MPersona 1.webp',
       '/images/MPersona 2.webp',
       '/images/MPersona 3.webp',
-      
+
     ],
     researchImage1Label: 'Personas',
     researchImage2: '/images/MTesting.webp',
@@ -250,7 +250,7 @@ export const PROJECTS: Project[] = [
     duration: '8 Months',
     role: 'Product Design & Strategy',
     team: '1 PM, 12 Junior Designers, 4 Engineers',
-    tools: ['Figma', 'Miro', 'UserTesting' ],
+    tools: ['Figma', 'Miro', 'UserTesting'],
     externalUrl: 'https://example.com/marketeq-proto',
     challenge: 'Marketeq Digital is a SaaS company that offers consulting services dedicated to optimizing business decisions for technology companies. My responsibility was to redesign the navigation of the software by implementing a tag system which allowed users to easily group and find their content efficiently.',
     problemStatement: 'Currently, users are able to create an infinite amount of files and content when managing their content. The application has no way for users to methodically group, organize and later find their information. We were tasked with finding a way to allow users to group their information.',
@@ -272,8 +272,8 @@ export const PROJECTS: Project[] = [
         description: "Tags were fully integrated into search and filters, enabling users to instantly surface relevant content.",
       },
       {
-      title: "Multi-Tag Organization",
-      description: "Users could apply multiple tags to a single asset.",
+        title: "Multi-Tag Organization",
+        description: "Users could apply multiple tags to a single asset.",
       },
       {
         title: "Additional Tag Features",
@@ -321,7 +321,7 @@ export const PROJECTS: Project[] = [
       '/images/Mdesign2.webp',
       '/images/Mdesign3.webp',
     ],
-        designDetailImage3: '/images/Micon.webp',
+    designDetailImage3: '/images/Micon.webp',
     designSystemTitle: 'Untitled UI Library',
     designSystemDescription: 'We leveraged the Untitled UI design system to maintain a clean, modern, and highly polished interface.',
     designColorPrimary: '#306CFE',
@@ -329,13 +329,13 @@ export const PROJECTS: Project[] = [
     designColorNeutral: '#ffffff',
     designOverviewSubtext: 'The goal was to transform complex content hierarchies into a modular, tag-based navigation system that scales with the user\'s needs.'
   },
- {
+  {
     id: '4',
     title: 'Seerlight',
     category: 'Design & Research • Education • Web App',
     description: 'Reimagining the college admissions system through gamification & personalization',
     imageUrl: '/images/videos/SeeVid.mp4',
-    previewVideoUrl:'/images/videos/SeeVid.mp4',
+    previewVideoUrl: '/images/videos/SeeVid.mp4',
     overviewImageUrl: '/images/Supplement.webp',
     researchImage1: [
       '/images/SPersona 1.webp',
@@ -353,7 +353,7 @@ export const PROJECTS: Project[] = [
     duration: '6 Months',
     role: 'UX Architect',
     team: '1 UX/UI Architect, 1 Product Manager, 2 Engineers',
-    tools: ['Figma', ],
+    tools: ['Figma',],
     externalUrl: 'https://example.com/seerlight-archive',
     challenge: 'SeerLight is an e-learning company whose mission it is to educate students about the college admissions system.SeerLight seeks to revolutionize the process by adding gamification and personalized guides with the aim of easing the college admissions process.',
     problemStatement: 'The college admissions process is challenging for many students due to unclear guidance, varying application requirements across schools, and limited access to experienced feedback. Without a clear starting point or consistent support, students often struggle to manage deadlines, interpret expectations, and evaluate the strength of their applications, leading to unnecessary stress and inequity.',
@@ -435,7 +435,7 @@ export const PROJECTS: Project[] = [
     designColorNeutral: '#ffffff',
     designOverviewSubtext: 'The goal was to reimagine the stressful college admissions process as a guided, engaging, and equitable journey for every student.'
   }
-  
+
 ];
 
 export const SIDE_PROJECTS: Project[] = [
@@ -457,7 +457,7 @@ export const SIDE_PROJECTS: Project[] = [
     reflection: 'This project strengthened my ability to translate research into product decisions by using methods like user interviews, A/B testing, and SPSS analysis to better understand user behavior and validate design choices.',
     conclusion: 'By combining personalized recommendations with socially relevant reviews, the app helps users feel more informed and confident when exploring new restaurants.',
     overviewImageUrl: '/images/MTbanner.webp',
-    externalUrl: 'https://example.com/mytaste-casestudy',
+    externalUrl: '',
     researchImage1: '/images/Story.webp',
     researchImage2: '/images/CompA.webp',
     researchImage3: '/images/Journey.webp',
@@ -468,13 +468,13 @@ export const SIDE_PROJECTS: Project[] = [
       '/images/MU1.webp'
     ]
   },
-    {
+  {
     id: 's2',
     title: 'GMC Interface',
     category: 'School Project • Automotive • UI/UX',
     description: 'Redesigning the GMC Sierra AT4.',
     imageUrl: '/images/GMDesign3.webp',
-    previewVideoUrl:'/images/videos/GMC2.mp4',
+    previewVideoUrl: '/images/videos/GMC2.mp4',
     duration: 'Jan - May 2026',
     role: 'UX/UI Designer ',
     org: 'University of Michigan & GMC',
@@ -496,17 +496,17 @@ export const SIDE_PROJECTS: Project[] = [
       '/images/GMDesign3.webp'
     ]
   },
-    {
+  {
     id: 's3',
     title: 'Muskegon Polish Festival',
     category: 'Client Project • Tourism • Developer',
     description: 'Developing interactive mobile experiences for the Muskegon Polish Festival.',
     imageUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1000',
-    previewVideoUrl:'/images/videos/MuskegonFilm.mp4',
+    previewVideoUrl: '/images/videos/MuskegonFilm.mp4',
     duration: 'Jan - May 2026',
-    role: 'Developer • Product Owner', 
+    role: 'Developer • Product Owner',
     org: 'Muskegon Polish Festival',
-    collaborators: ['Jonte Taffe', 'Boran Yang','Sami Pratt', 'Siraaj Kudtarkar', 'Xiwen Cao' ],
+    collaborators: ['Jonte Taffe', 'Boran Yang', 'Sami Pratt', 'Siraaj Kudtarkar', 'Xiwen Cao'],
     tools: ['Jira', 'Confluence', 'Figma', 'React Native', 'Typescript'],
     problemStatement: 'The Muskegon Polish Festival found that presenting cultural history through static posters made information difficult to access and engage with, especially for younger visitors, causing meaningful heritage and stories to be lost within the larger festival experience.',
     researchOverview: 'We followed a collaborative Agile process with rotating leadership, democratic task management, and continuous team communication. Regular syncs, asynchronous updates, and sprint retrospectives helped us refine our workflow and maintain steady progress.',
@@ -530,7 +530,7 @@ export const SIDE_PROJECTS: Project[] = [
     category: 'School Project • UI/UX',
     description: 'Twyne is an AI-powered app that helps users network with confidence.',
     imageUrl: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1000',
-    previewVideoUrl:'/images/videos/TwyneDemo.mp4',
+    previewVideoUrl: '/images/videos/TwyneDemo.mp4',
     duration: 'Sept - Dec 2024',
     role: 'UX/UI Designer',
     org: 'University of Michigan',

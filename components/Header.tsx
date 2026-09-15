@@ -18,9 +18,9 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems: { id: View; label: string }[] = [
+  const navItems: { id: View; label: string; disabled?: boolean }[] = [
     { id: 'work', label: 'Work' },
-    { id: 'case-studies', label: 'Case Studies' },
+    { id: 'case-studies', label: 'Case Studies', disabled: true },
     { id: 'info', label: 'Info' },
   ];
 
@@ -58,16 +58,20 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
           {navItems.map((item) => {
             const isActive = currentView === item.id;
             return (
-              <button 
+              <button
                 key={item.id}
-                onClick={() => onViewChange(item.id)} 
+                onClick={() => !item.disabled && onViewChange(item.id)}
+                disabled={item.disabled}
+                aria-disabled={item.disabled}
                 className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  isActive 
-                    ? 'text-white bg-white/10' 
+                  item.disabled
+                    ? 'text-white/25 cursor-not-allowed'
+                    : isActive
+                    ? 'text-white bg-white/10'
                     : 'text-white/60 hover:text-white hover:bg-white/5'
                 }`}
               >
-                {isActive && (
+                {isActive && !item.disabled && (
                   <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-[1.5px] bg-white rounded-full shadow-[0_0_15px_4px_rgba(255,255,255,0.6)] z-20" />
                 )}
                 {item.label}

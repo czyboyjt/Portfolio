@@ -1,6 +1,6 @@
 {
-  "name": "UX Portfolio",
-  "description": "A minimalist, dark-themed UX portfolio featuring glassmorphic design and sleek project archives.",
+  "name": "Portfolio",
+  "description": "Jonte Taffe - Product Portfolio",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

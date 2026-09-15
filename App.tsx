@@ -64,11 +64,11 @@ const CinematicBackground: React.FC<{ mousePos: { x: number, y: number }, isDeta
 });
 
 
-const WorkView: React.FC<{ 
-  projects: Project[]; 
+const WorkView: React.FC<{
+  projects: Project[];
   onProjectClick: (project: Project) => void;
   onSideProjectClick: (project: Project) => void;
-}> = ({ projects, onProjectClick, onSideProjectClick }) => {
+}> = React.memo(({ projects, onProjectClick, onSideProjectClick }) => {
   return (
     <div className="relative">
       <section id="hero" className="pt-48 pb-0 px-6 relative z-10 overflow-hidden">
@@ -126,7 +126,7 @@ const WorkView: React.FC<{
       </section>
     </div>
   );
-};
+});
 
 
 const BentoCard: React.FC<{ 
@@ -680,6 +680,10 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
+  const handleSideProjectClick = useCallback((project: Project) => {
+    setSelectedOtherProject(project);
+  }, []);
+
   const handleBack = useCallback(() => {
     setCurrentView('work');
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -745,7 +749,7 @@ const App: React.FC = () => {
           <WorkView 
             projects={PROJECTS} 
             onProjectClick={handleProjectClick} 
-            onSideProjectClick={(project) => setSelectedOtherProject(project)}
+            onSideProjectClick={handleSideProjectClick}
           />
         )}
         
@@ -775,12 +779,12 @@ const App: React.FC = () => {
 
               {/* Row 1: Gallery 1 */}
               <BentoCard noPadding className="col-span-6 md:col-span-2 h-[220px]">
-                <img loading="lazy" decoding="async" src="/src/assets/images/regenerated_image_1778557222201.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
+                <img loading="lazy" decoding="async" src="/images/regenerated_image_1778557222201.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
               </BentoCard>
 
               {/* Row 1: Gallery 2 */}
               <BentoCard noPadding className="col-span-6 md:col-span-2 h-[220px]">
-                <img loading="lazy" decoding="async" src="/src/assets/images/regenerated_image_1778557476458.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
+                <img loading="lazy" decoding="async" src="/images/regenerated_image_1778557476458.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
               </BentoCard>
 
               {/* Row 1: Socials Grid */}

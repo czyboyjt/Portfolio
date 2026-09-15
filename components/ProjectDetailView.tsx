@@ -241,6 +241,19 @@ const ProjectDetailView: React.FC<{
   });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('[class*="reveal"]').forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, [project.id]);
+
   const nextProject = projects[(projects.findIndex(p => p.id === project.id) + 1) % projects.length];
 
   return (
