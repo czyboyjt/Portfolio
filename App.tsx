@@ -52,12 +52,12 @@ const CinematicBackground: React.FC<{ mousePos: { x: number, y: number }, isDeta
 
       {isDetail && (
         <div 
-          className="absolute w-[400px] h-[400px] bg-orange-500/[0.15] orange-glow rounded-full transition-transform duration-[800ms] ease-out will-change-transform"
+          className="absolute w-[400px] h-[400px] bg-silver-500/[0.15] orange-glow rounded-full transition-transform duration-[800ms] ease-out will-change-transform"
           style={{ transform: `translate3d(${mousePos.x - 200}px, ${mousePos.y - 200}px, 0)` }}
         ></div>
       )}
 
-      <div className={`absolute top-[10%] right-[-5%] w-[600px] h-[600px] ${isDetail ? 'bg-orange-600/[0.1]' : 'bg-slate-400/[0.08]'} rounded-full blur-[200px] animate-drift pointer-events-none transition-colors duration-1000`}></div>
+      <div className={`absolute top-[10%] right-[-5%] w-[600px] h-[600px] ${isDetail ? 'bg-silver-600/[0.1]' : 'bg-slate-400/[0.08]'} rounded-full blur-[200px] animate-drift pointer-events-none transition-colors duration-1000`}></div>
       <div className="absolute bottom-[10%] left-[-10%] w-[700px] h-[700px] bg-slate-200/[0.05] rounded-full blur-[220px] animate-drift-slow pointer-events-none"></div>
     </div>
   );
@@ -71,9 +71,9 @@ const WorkView: React.FC<{
 }> = React.memo(({ projects, onProjectClick, onSideProjectClick }) => {
   return (
     <div className="relative">
-      <section id="hero" className="pt-48 pb-0 px-6 relative z-10 overflow-hidden">
+      <section id="hero" className="pt-28 md:pt-48 pb-0 px-6 relative z-10 overflow-hidden">
         <div className="max-w-7xl mx-auto relative">
-          <div className="reveal flex flex-col items-start text-left" data-delay="100">
+          <div className="reveal flex flex-col items-start text-left mt-6 md:mt-0" data-delay="100">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 font-display text-white ">Jonte Taffe</h1>
             <p className="text-base md:text-lg text-white/60 max-w-xl leading-relaxed font-light mb-4">
               Product builder combining strategy, design and technology <span className="text-purple-400">🍁</span>
@@ -94,8 +94,8 @@ const WorkView: React.FC<{
       </section>
       <section id="work" className="pt-12 pb-24 px-6 relative overflow-hidden z-10">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="border-t border-white/10 mb-20 pt-12 reveal">
-            <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+          <div className="border-t border-white/10 mb-8 md:mb-20 pt-12 reveal">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div>
                 <span className="text-[10px] font-black tracking-[0.3em] text-white/30 uppercase mb-3 block font-sans">Portfolio</span>
                 <h2 className="text-3xl md:text-5xl font-bold tracking-tight font-display text-white">Featured Projects</h2>
@@ -111,8 +111,8 @@ const WorkView: React.FC<{
           </div>
         </div>
       </section>
-      <section id="side-projects" className="py-32 relative z-10 overflow-hidden border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 mb-24 reveal relative z-10">
+      <section id="side-projects" className="pt-32 pb-10 md:py-32 relative z-10 overflow-hidden border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 mb-8 md:mb-24 reveal relative z-10">
           <div className="flex flex-col items-center text-center gap-4">
             <div>
               <span className="text-[10px] font-black tracking-[0.3em] text-white/30 uppercase mb-3 block font-sans">Personal Work</span>
@@ -120,7 +120,7 @@ const WorkView: React.FC<{
             </div>
           </div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-24 md:pb-20">
           <ProjectStack projects={SIDE_PROJECTS} onProjectClick={onSideProjectClick} />
         </div>
       </section>
@@ -173,10 +173,10 @@ const OtherProjectModal: React.FC<{
           </button>
 
           <div className="flex-1 overflow-y-auto custom-scrollbar">
-            <div className="p-8 md:p-16">
+            <div className="pt-20 p-8 md:p-16">
               {/* Header Text */}
               <div className="mb-16">
-                <span className="text-xs font-black tracking-[0.4em] text-orange-500 uppercase mb-4 block">
+                <span className="text-[10px] md:text-xs font-black tracking-[0.4em] text-silver-500 uppercase mb-4 block">
                   {project.category}
                 </span>
                 <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter font-display">
@@ -185,7 +185,7 @@ const OtherProjectModal: React.FC<{
               </div>
 
               {/* Metadata Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-20 pb-12 border-b border-white/5">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-0 md:mb-20 pb-4 md:pb-12 border-b border-white/5">
                 <div>
                   <h4 className="text-[10px] font-black tracking-widest text-white/30 uppercase mb-3">Timeline</h4>
                   <p className="text-sm text-white/80 font-medium">{project.duration || '2024'}</p>
@@ -200,13 +200,27 @@ const OtherProjectModal: React.FC<{
                 </div>
               </div>
 
+              {/* Stack - Mobile only, sits right under Project Details */}
+              {project.tools && (
+                <section className="md:hidden mt-6 mb-16">
+                  <h3 className="text-[10px] font-black tracking-widest text-white/30 uppercase mb-4">Stack</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tools.map(tool => (
+                      <span key={tool} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-white/60">
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              )}
+
               {/* Content Sections */}
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
-                <div className="md:col-span-8 space-y-20">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-16">
+                <div className="md:col-span-8 space-y-0 md:space-y-20">
                   {/* Project Overview */}
-                  <section>
+                  <section className="mb-14 md:mb-0">
                     <h3 className="text-2xl font-bold text-white mb-6 font-display">Overview</h3>
-                    <p className="text-lg text-white/70 leading-relaxed font-light mb-8">
+                    <p className="text-lg text-white/70 leading-relaxed font-light mb-0 md:mb-8">
                       {project.description}
                     </p>
                   </section>
@@ -215,7 +229,7 @@ const OtherProjectModal: React.FC<{
                   {project.overviewImageUrl && (
                     <div 
                       onClick={() => onExpandImage(project.overviewImageUrl!)}
-                      className="w-full aspect-[21/10] rounded-3xl overflow-hidden border border-white/10 shadow-2xl cursor-zoom-in group mb-8"
+                      className="w-full aspect-video md:aspect-[21/10] rounded-3xl overflow-hidden border border-white/10 shadow-2xl cursor-zoom-in group mb-8"
                     >
                       <img loading="lazy" decoding="async" 
                         src={project.overviewImageUrl} 
@@ -226,7 +240,7 @@ const OtherProjectModal: React.FC<{
                   )}
 
                   {/* Problem */}
-                  <section>
+                  <section className="mb-14 md:mb-0 pt-10 md:pt-0 border-t md:border-t-0 border-white/10">
                     <h3 className="text-2xl font-bold text-white mb-6 font-display">The Problem</h3>
                     <p className="text-lg text-white/60 leading-relaxed font-light mb-8">
                       {project.problemStatement || "Identifying and addressing the core friction points in the user journey to create a more seamless experience."}
@@ -249,33 +263,33 @@ const OtherProjectModal: React.FC<{
                   </section>
 
                   {/* Research */}
-                  <section>
+                  <section className="mb-14 md:mb-0 pt-10 md:pt-0 border-t md:border-t-0 border-white/10">
                     <h3 className="text-2xl font-bold text-white mb-6 font-display">Research</h3>
                     <p className="text-lg text-white/60 leading-relaxed font-light mb-8">
                       {project.researchOverview || "Deep diving into user behaviors and market trends to inform evidence-based design decisions."}
                     </p>
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       {project.researchImage2 ? (
-                        <div 
+                        <div
                           onClick={() => onExpandImage(project.researchImage2!)}
-                          className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in group"
+                          className="aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in group"
                         >
                           <img loading="lazy" decoding="async" src={project.researchImage2} alt="Research 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
                       ) : (
-                        <div className="aspect-[4/3] rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center">
+                        <div className="aspect-video md:aspect-[4/3] rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center">
                           <span className="text-white/20 text-xs uppercase tracking-widest">Research Asset 01</span>
                         </div>
                       )}
                       {project.researchImage3 ? (
-                        <div 
+                        <div
                           onClick={() => onExpandImage(project.researchImage3!)}
-                          className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in group"
+                          className="aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in group"
                         >
                           <img loading="lazy" decoding="async" src={project.researchImage3} alt="Research 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
                       ) : (
-                        <div className="aspect-[4/3] rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center">
+                        <div className="aspect-video md:aspect-[4/3] rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center">
                           <span className="text-white/20 text-xs uppercase tracking-widest">Research Asset 02</span>
                         </div>
                       )}
@@ -283,7 +297,7 @@ const OtherProjectModal: React.FC<{
                   </section>
 
                   {/* Solution */}
-                  <section>
+                  <section className="mb-14 md:mb-0 pt-10 md:pt-0 border-t md:border-t-0 border-white/10">
                     <h3 className="text-2xl font-bold text-white mb-6 font-display">The Solution</h3>
                     <p className="text-lg text-white/60 leading-relaxed font-light mb-8">
                       {project.solution || "A streamlined digital solution focused on user-centric design principles and intuitive interaction patterns."}
@@ -299,24 +313,24 @@ const OtherProjectModal: React.FC<{
                   </section>
 
                   {/* Design Details */}
-                  <section className="space-y-8">
+                  <section className="space-y-8 mb-14 md:mb-0 pt-10 md:pt-0 border-t md:border-t-0 border-white/10">
                     <h3 className="text-2xl font-bold text-white mb-6 font-display">Design Details</h3>
                     {project.designDetailImage1 && (
-                      <div className="grid grid-cols-2 gap-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {Array.isArray(project.designDetailImage1) ? (
                           project.designDetailImage1.map((img, i) => (
-                            <div 
-                              key={i} 
+                            <div
+                              key={i}
                               onClick={() => onExpandImage(img)}
-                              className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 cursor-zoom-in group"
+                              className="aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 cursor-zoom-in group"
                             >
                               <img loading="lazy" decoding="async" src={img} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                           ))
                         ) : (
-                          <div 
+                          <div
                             onClick={() => onExpandImage(project.designDetailImage1 as string)}
-                            className="col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 cursor-zoom-in group"
+                            className="md:col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 cursor-zoom-in group"
                           >
                             <img loading="lazy" decoding="async" src={project.designDetailImage1 as string} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                           </div>
@@ -324,21 +338,21 @@ const OtherProjectModal: React.FC<{
                       </div>
                     )}
                     {project.designDetailImage2 && (
-                      <div className="grid grid-cols-2 gap-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {Array.isArray(project.designDetailImage2) ? (
                           project.designDetailImage2.map((img, i) => (
-                            <div 
-                              key={i} 
+                            <div
+                              key={i}
                               onClick={() => onExpandImage(img)}
-                              className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 cursor-zoom-in group"
+                              className="aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 cursor-zoom-in group"
                             >
                               <img loading="lazy" decoding="async" src={img} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                           ))
                         ) : (
-                          <div 
+                          <div
                             onClick={() => onExpandImage(project.designDetailImage2 as string)}
-                            className="col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 cursor-zoom-in group"
+                            className="md:col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 cursor-zoom-in group"
                           >
                             <img loading="lazy" decoding="async" src={project.designDetailImage2 as string} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                           </div>
@@ -369,7 +383,7 @@ const OtherProjectModal: React.FC<{
                   </section>
 
                   {/* Conclusion */}
-                  <section>
+                  <section className="mb-0 pt-10 md:pt-0 border-t md:border-t-0 border-white/10">
                     <h3 className="text-2xl font-bold text-white mb-6 font-display">Conclusion</h3>
                     <p className="text-lg text-white/60 leading-relaxed font-light">
                       {project.conclusion || "This project represents a significant milestone in my design journey, reinforcing the value of user-centered methodologies and iterative refinement. The final outcome not only meets the initial objectives but sets a strong foundation for future enhancements."}
@@ -388,7 +402,7 @@ const OtherProjectModal: React.FC<{
                     </section>
 
                     {project.tools && (
-                      <section>
+                      <section className="hidden md:block">
                         <h3 className="text-[10px] font-black tracking-widest text-white/30 uppercase mb-4">Stack</h3>
                         <div className="flex flex-wrap gap-2">
                           {project.tools.map(tool => (
@@ -409,7 +423,7 @@ const OtherProjectModal: React.FC<{
                           className="w-full glass py-4 rounded-2xl text-[10px] font-black tracking-[0.2em] uppercase text-center text-white hover:bg-orange-500/20 hover:border-orange-500/40 transition-all flex items-center justify-center gap-3 group/btn"
                         >
                           View Full Case Study
-                          <ChevronRight className="w-4 h-4 text-orange-500 transition-transform group-hover/btn:translate-x-1" />
+                          <ChevronRight className="w-4 h-4 text-silver-500 transition-transform group-hover/btn:translate-x-1" />
                         </a>
                       </section>
                     )}
@@ -698,10 +712,10 @@ const App: React.FC = () => {
   }, [selectedProject]);
 
   const QUOTES = [
-    { text: 'remember that you <span class="text-orange-500">must live</span>', author: 'Memento Vivere' },
-    { text: 'A person who never made a mistake <span class="text-orange-500"> never tried anything new </span>', author: 'Albert Einstein' },
-    { text: 'The best way to <span class="text-orange-500"> predict your future </span> is to create it', author: 'Abraham Lincoln' },
-    { text: '<span class="text-orange-500">Be yourself</span>, everyone else is already taken', author: 'Oscar Wilde' }
+    { text: 'remember that you <span class="text-silver-500">must live</span>', author: 'Memento Vivere' },
+    { text: 'A person who never made a mistake <span class="text-silver-500"> never tried anything new </span>', author: 'Albert Einstein' },
+    { text: 'The best way to <span class="text-silver-500"> predict your future </span> is to create it', author: 'Abraham Lincoln' },
+    { text: '<span class="text-silver-500">Be yourself</span>, everyone else is already taken', author: 'Oscar Wilde' }
   ];
 
   const [quoteIndex, setQuoteIndex] = useState(0);
@@ -728,7 +742,7 @@ const App: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white selection:bg-orange-500/30 selection:text-orange-200 overflow-x-hidden custom-cursor-area">
+    <div className="min-h-screen bg-[#080808] text-white selection:bg-silver-500/30 selection:text-silver-200 overflow-x-hidden custom-cursor-area">
       <CinematicBackground mousePos={mousePos} isDetail={currentView === 'project-detail'} />
       <Header currentView={currentView} onViewChange={(view) => {
         setCurrentView(view);
@@ -764,11 +778,20 @@ const App: React.FC = () => {
         )}
 
         {currentView === 'info' && (
-          <div className="pt-40 pb-32 px-6 max-w-7xl mx-auto min-h-screen">
+          <div className="pt-40 pb-10 md:pb-32 px-6 max-w-7xl mx-auto min-h-screen">
             <div className="grid grid-cols-12 gap-5 md:gap-6">
               
               {/* Row 1: Intro Card */}
-              <BentoCard className="col-span-12 md:col-span-5 flex flex-col justify-center h-[220px]">
+              <div className="order-1 md:order-none col-span-12 md:hidden flex flex-col justify-center mb-6">
+                <h2 className="text-3xl font-display font-bold leading-tight mb-3 text-white">
+                  Hey, I'm Jonte -
+                </h2>
+                <p className="text-base text-white/70 font-light leading-relaxed mb-6">
+                  Thanks for stopping by!
+                </p>
+                <div className="h-px w-full bg-white/10"></div>
+              </div>
+              <BentoCard className="hidden md:flex md:col-span-5 flex-col justify-center h-[220px]">
                 <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight mb-3">
                   Hey, I'm Jonte -
                 </h2>
@@ -778,19 +801,19 @@ const App: React.FC = () => {
               </BentoCard>
 
               {/* Row 1: Gallery 1 */}
-              <BentoCard noPadding className="col-span-6 md:col-span-2 h-[220px]">
+              <BentoCard noPadding className="order-2 md:order-none col-span-12 md:col-span-2 h-[220px]">
                 <img loading="lazy" decoding="async" src="/images/regenerated_image_1778557222201.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
               </BentoCard>
 
               {/* Row 1: Gallery 2 */}
-              <BentoCard noPadding className="col-span-6 md:col-span-2 h-[220px]">
+              <BentoCard noPadding className="order-6 md:order-none col-span-6 md:col-span-2 h-[280px] md:h-[220px]">
                 <img loading="lazy" decoding="async" src="/images/regenerated_image_1778557476458.jpg" className="w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
               </BentoCard>
 
               {/* Row 1: Socials Grid */}
-              <div className="col-span-12 md:col-span-3 grid grid-cols-2 grid-rows-2 gap-2 md:gap-3 h-[220px]">
+              <div className="order-8 md:order-none col-span-12 md:col-span-3 grid grid-cols-2 grid-rows-2 gap-2 md:gap-3 h-[220px]">
                 {[
-                  { label: 'Dribbble', url: 'https://dribbble.com/Jtaffe', icon: <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.522-1.604 4.1-4.39 4.392-7.574v.704zm-6.715.647c-.253.033-.49.076-.694.12 2.76 7.496 3.684 9.473 3.684 9.473-.3.17-.61.314-.925.44.03-.042-1.128-2.348-3.775-9.434-2.67.625-5.377.945-8.03.953.115.54.26 1.062.427 1.57 2.383-.025 4.88-.337 7.42-.924l.02.046l1.238 3.324c1.238 3.324 1.77 6.096 1.83 7.734-.03.003-.062.01-.094.01-.61.04-1.228.062-1.854.062-1.028 0-2.022-.132-2.968-.377.008-.052.484-2.227-1.11-6.495l-.013-.032c-2.48.915-5.312 1.472-8.42 1.63-.002-.136-.005-.27-.005-.407 0-4.04 2.182-7.56 5.434-9.48.068.163.784 1.79 1.928 3.868 3.03-1.096 5.86-1.144 6.04-1.144-.015-.054-.423-1.428-1.056-3.32-3.364 1.15-7.796.884-11.455-.747l-.022.064c1.47-3.13 4.67-5.286 8.384-5.286 2.053 0 3.945.674 5.474 1.81-.035.06-.948 1.662-1.743 3.83 2.915-1.048 5.485-.34 6.27-.076.012-.032.023-.063.033-.095.534 1.135.834 2.404.834 3.743 0 1.258-.262 2.454-.734 3.535l-.01-.03z"/></svg> },
+                  { label: 'Dribbble', url: 'https://dribbble.com/Jtaffe', icon: <img src="https://cdn.simpleicons.org/dribbble/ffffff" alt="Dribbble" className="w-5 h-5 opacity-80 group-hover/social:opacity-100 transition-opacity" referrerPolicy="no-referrer" /> },
                   { label: 'LinkedIn', url: 'https://www.linkedin.com/in/jontetaffe/', icon: <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> },
                   { label: 'Email', url: 'mailto:jtaffe@umich.edu', icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>, fullWidth: true }
                 ].map((social, i) => (
@@ -802,21 +825,21 @@ const App: React.FC = () => {
               </div>
 
               {/* Row 2: Portrait */}
-              <BentoCard noPadding className="col-span-6 md:col-span-2 h-[280px]">
+              <BentoCard noPadding className="order-5 md:order-none col-span-6 md:col-span-2 h-[280px]">
                 <img loading="lazy" decoding="async" src="https://cdn.midjourney.com/115b35c3-7cb2-46db-b226-6058e28a39cb/0_3.png" className="w-full h-full object-cover" />
               </BentoCard>
 
               {/* Row 2: About */}
-              <BentoCard 
-                className="col-span-6 md:col-span-4 h-[280px] flex flex-col justify-between"
+              <BentoCard
+                className="order-3 md:order-none col-span-12 md:col-span-4 h-[200px] md:h-[280px] flex flex-col justify-between"
                 onClick={() => setIsAboutModalOpen(true)}
               >
-                <div><span className="text-[9px] font-black tracking-[0.4em] uppercase text-white/80 mb-4 block font-sans">About</span><p className="text-xl md:text-2xl font-display font-medium leading-tight text-white">Passionate about turning complex ideas into intuitive, human-centered products.</p></div>
+                <div><span className="text-[9px] font-black tracking-[0.4em] uppercase text-white/80 mb-4 block font-sans">About</span><p className="text-base md:text-2xl font-display font-medium leading-tight text-white line-clamp-4 md:line-clamp-none">Passionate about turning complex ideas into intuitive, human-centered products.</p></div>
                 <div className="flex justify-end"><div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:border-white/60 transition-colors"><svg className="w-4 h-4 text-white/80 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg></div></div>
               </BentoCard>
 
               {/* Row 2: Gallery Laptop */}
-              <BentoCard noPadding className="col-span-12 md:col-span-3 h-[280px]">
+              <BentoCard noPadding className="order-7 md:order-none col-span-12 md:col-span-3 h-[280px]">
                 <div className="w-full h-full relative overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.img 
@@ -836,7 +859,7 @@ const App: React.FC = () => {
                     {GALLERY_IMAGES.map((_, i) => (
                       <div 
                         key={i}
-                        className={`h-0.5 rounded-full transition-all duration-500 ${i === galleryIndex ? 'bg-orange-500 w-4' : 'bg-white/20 w-1'}`}
+                        className={`h-0.5 rounded-full transition-all duration-500 ${i === galleryIndex ? 'bg-silver-500 w-4' : 'bg-white/20 w-1'}`}
                       />
                     ))}
                   </div>
@@ -844,28 +867,28 @@ const App: React.FC = () => {
               </BentoCard>
 
               {/* Row 2: Play */}
-              <BentoCard className="col-span-12 md:col-span-3 h-[280px] flex flex-col justify-between bg-white/[0.02] opacity-60 pointer-events-none select-none border-white/5">
+              <BentoCard className="hidden md:flex col-span-12 md:col-span-3 h-[280px] flex-col justify-between bg-white/[0.02] opacity-60 pointer-events-none select-none border-white/5">
                 <div><span className="text-[9px] font-black tracking-[0.4em] uppercase text-white/40 mb-4 block font-sans">Play</span><p className="text-xl md:text-2xl font-display font-medium leading-tight text-white/60">In progress</p></div>
                 <div className="flex justify-end opacity-0"><div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center"><svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg></div></div>
               </BentoCard>
 
               {/* Row 3: Spotify Now Playing */}
-              <BentoCard noPadding className="col-span-12 md:col-span-5 h-[140px] flex flex-col justify-center bg-[#1DB954]/5 overflow-hidden group/spotify">
+              <BentoCard noPadding className="hidden md:flex col-span-12 md:col-span-5 h-[140px] flex-col justify-center bg-[#1DB954]/5 overflow-hidden group/spotify">
                 <SpotifyCard />
                 {/* Subtle green glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1DB954]/5 to-transparent opacity-0 group-hover/spotify:opacity-100 transition-opacity duration-700"></div>
               </BentoCard>
 
               {/* Row 3: Quote Box - Refined with click icon in top right */}
-              <BentoCard 
-                noPadding 
-                className="col-span-12 md:col-span-3 h-[140px] flex flex-col justify-between overflow-hidden group/quote relative bg-white/[0.04] cursor-pointer active:scale-[0.98] transition-all duration-300"
+              <BentoCard
+                noPadding
+                className="hidden md:flex col-span-12 md:col-span-3 h-[140px] flex-col justify-between overflow-hidden group/quote relative bg-white/[0.04] cursor-pointer active:scale-[0.98] transition-all duration-300"
                 onClick={cycleQuote}
               >
                 <div className="flex justify-between items-center relative z-10 px-6 pt-5">
                   <span className="text-[9px] font-black tracking-[0.4em] uppercase text-white/60 font-sans">Quote</span>
-                  <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover/quote:border-orange-500/50 transition-colors">
-                    <MousePointer2 className="w-3.5 h-3.5 text-white/60 group-hover/quote:text-orange-500 transition-colors" />
+                  <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover/quote:border-silver-500/50 transition-colors">
+                    <MousePointer2 className="w-3.5 h-3.5 text-white/60 group-hover/quote:text-silver-500 transition-colors" />
                   </div>
                 </div>
                 
@@ -899,11 +922,11 @@ const App: React.FC = () => {
                 </div>
 
                 {/* Subtle glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover/quote:opacity-100 transition-opacity duration-700"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-silver-500/5 to-transparent opacity-0 group-hover/quote:opacity-100 transition-opacity duration-700"></div>
               </BentoCard>
 
               {/* Row 3: Stack - Refined Layout */}
-              <BentoCard noPadding className="col-span-12 md:col-span-4 h-[140px] flex flex-col overflow-hidden group/stack-card relative bg-white/[0.02]">
+              <BentoCard noPadding className="order-4 md:order-none col-span-12 md:col-span-4 h-[140px] flex flex-col overflow-hidden group/stack-card relative bg-white/[0.02]">
                 {/* Header - Simplified */}
                 <div className="px-6 pt-5 relative z-10">
                   <span className="text-[9px] font-black tracking-[0.4em] uppercase text-white/40 font-sans">Stack I Use</span>
@@ -932,7 +955,7 @@ const App: React.FC = () => {
                 </div>
 
                 {/* Subtle glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover/stack-card:opacity-100 transition-opacity duration-700"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-silver-500/5 to-transparent opacity-0 group-hover/stack-card:opacity-100 transition-opacity duration-700"></div>
               </BentoCard>
 
             </div>

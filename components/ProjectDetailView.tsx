@@ -21,7 +21,7 @@ const ScrollProgress: React.FC = () => {
   return (
     <div className="fixed top-0 left-0 w-full h-[3px] z-[110] bg-white/[0.1]">
       <div
-        className="h-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.8)] transition-all duration-300 ease-out"
+        className="h-full bg-silver-500 shadow-[0_0_10px_rgba(163,168,175,0.8)] transition-all duration-300 ease-out"
         style={{ width: `${scroll}%` }}
       />
     </div>
@@ -36,29 +36,29 @@ const VisualLanguageGrid: React.FC<{
   setDesignDetail2Index: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ project, onImageClick, designDetail1Index, designDetail2Index, setDesignDetail2Index }) => {
   return (
-    <div className="w-full max-w-7xl mx-auto py-12 px-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-        <div className="lg:col-span-1 glass-panel p-10 rounded-[2.5rem] border border-white/20 flex flex-col justify-between hover:border-orange-500/30 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 group shadow-2xl">
+    <div className="w-full max-w-7xl mx-auto py-6 px-0 md:py-12 md:px-6">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 items-stretch">
+        <div className="order-4 md:order-none lg:col-span-1 glass-panel p-4 md:p-10 rounded-[1.25rem] md:rounded-[2.5rem] border border-white/20 flex flex-col justify-between hover:border-orange-500/30 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 group shadow-2xl">
           <div>
-            <span className="text-[11px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-8 block font-sans">Typography</span>
-            <h3 className="text-3xl font-bold text-white mb-6 font-display">{project.designTypography || 'Satoshi'}</h3>
-            <div className="text-7xl font-bold text-white/80 leading-none mb-10 group-hover:text-orange-500 transition-colors font-display">Aa</div>
+            <span className="text-[9px] md:text-[11px] font-bold text-silver-500 uppercase tracking-[0.3em] mb-3 md:mb-8 block font-sans">Typography</span>
+            <h3 className="text-lg md:text-3xl font-bold text-white mb-2 md:mb-6 font-display">{project.designTypography || 'Satoshi'}</h3>
+            <div className="text-3xl md:text-7xl font-bold text-white/80 leading-none mb-2 md:mb-10 group-hover:text-orange-500 transition-colors font-display">Aa</div>
           </div>
         </div>
 
-        <div className="lg:col-span-1 glass-panel p-10 rounded-[2.5rem] border border-white/20 hover:border-orange-500/30 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 shadow-2xl">
-          <span className="text-[11px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-8 block font-sans">Palette</span>
-          <div className="flex flex-col gap-6">
+        <div className="order-5 md:order-none lg:col-span-1 glass-panel p-4 md:p-10 rounded-[1.25rem] md:rounded-[2.5rem] border border-white/20 hover:border-orange-500/30 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 shadow-2xl">
+          <span className="text-[9px] md:text-[11px] font-bold text-silver-500 uppercase tracking-[0.3em] mb-3 md:mb-8 block font-sans">Palette</span>
+          <div className="flex flex-col gap-2 md:gap-6">
             {[
               { name: 'Primary', color: project.designColorPrimary || '#0F172A', role: 'Core' },
               { name: 'Accent', color: project.designColorAccent || '#F97316', role: 'Action' },
               { name: 'Neutral', color: project.designColorNeutral || '#F8FAFC', role: 'Base' }
             ].map((swatch, i) => (
-              <div key={i} className="flex items-center gap-6 group/item">
-                <div className="w-14 h-14 rounded-2xl border border-white/20 shadow-xl transition-transform group-hover/item:scale-110" style={{ backgroundColor: swatch.color }}></div>
+              <div key={i} className="flex items-center gap-3 md:gap-6 group/item">
+                <div className="w-8 h-8 md:w-14 md:h-14 rounded-lg md:rounded-2xl border border-white/20 shadow-xl transition-transform group-hover/item:scale-110" style={{ backgroundColor: swatch.color }}></div>
                 <div className="flex flex-col leading-tight">
-                   <span className="text-lg font-bold text-white font-display tracking-tight">{swatch.color}</span>
-                   <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-1 font-sans">{swatch.name}</span>
+                   <span className="text-xs md:text-lg font-bold text-white font-display tracking-tight">{swatch.color}</span>
+                   <span className="text-[8px] md:text-[10px] font-bold text-white/40 uppercase tracking-widest mt-0.5 md:mt-1 font-sans">{swatch.name}</span>
                 </div>
               </div>
             ))}
@@ -72,7 +72,7 @@ const VisualLanguageGrid: React.FC<{
               : (project.designDetailImage1 || project.imageUrl);
             onImageClick(currentImg);
           }}
-          className="lg:col-span-1 aspect-square md:aspect-auto glass-panel rounded-[2.5rem] border border-white/20 overflow-hidden relative group shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-700 cursor-zoom-in"
+          className="order-1 md:order-none col-span-2 md:col-span-1 lg:col-span-1 aspect-[4/5] md:aspect-auto rounded-[1.5rem] md:rounded-[2.5rem] glass-panel border border-white/20 overflow-hidden relative group shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-700 cursor-zoom-in"
         >
           <AnimatePresence mode="wait">
             {Array.isArray(project.designDetailImage1) ? (
@@ -95,7 +95,7 @@ const VisualLanguageGrid: React.FC<{
               {project.designDetailImage1.map((_, i) => (
                 <div
                   key={i}
-                  className={`w-1 h-1 rounded-full transition-all duration-300 ${i === designDetail1Index ? 'bg-orange-500 w-3' : 'bg-white/20'}`}
+                  className={`w-1 h-1 rounded-full transition-all duration-300 ${i === designDetail1Index ? 'bg-silver-500 w-3' : 'bg-white/20'}`}
                 />
               ))}
             </div>
@@ -110,7 +110,7 @@ const VisualLanguageGrid: React.FC<{
               onImageClick(project.designDetailImage2 as string || project.overviewImageUrl || '');
             }
           }}
-          className={`lg:col-span-2 aspect-[2/1] glass-panel rounded-[3rem] border border-white/20 overflow-hidden relative group shadow-2xl hover:scale-[1.01] hover:-translate-y-1 transition-all duration-700 ${Array.isArray(project.designDetailImage2) && project.designDetailImage2.length > 1 ? 'cursor-pointer' : 'cursor-zoom-in'}`}
+          className={`hidden md:block order-2 md:order-none lg:col-span-2 aspect-[2/1] glass-panel rounded-[3rem] border border-white/20 overflow-hidden relative group shadow-2xl hover:scale-[1.01] hover:-translate-y-1 transition-all duration-700 ${Array.isArray(project.designDetailImage2) && project.designDetailImage2.length > 1 ? 'cursor-pointer' : 'cursor-zoom-in'}`}
         >
           <AnimatePresence mode="wait">
             {Array.isArray(project.designDetailImage2) ? (
@@ -144,7 +144,7 @@ const VisualLanguageGrid: React.FC<{
                   {project.designDetailImage2.map((_, i) => (
                     <div
                       key={i}
-                      className={`w-1 h-1 rounded-full transition-all duration-300 ${i === designDetail2Index ? 'bg-orange-500 w-3' : 'bg-white/20'}`}
+                      className={`w-1 h-1 rounded-full transition-all duration-300 ${i === designDetail2Index ? 'bg-silver-500 w-3' : 'bg-white/20'}`}
                     />
                   ))}
                 </div>
@@ -155,7 +155,7 @@ const VisualLanguageGrid: React.FC<{
 
         <div
           onClick={() => onImageClick(project.designDetailImage3 || project.researchImage1 || project.imageUrl)}
-          className="lg:col-span-1 aspect-square glass-panel rounded-[3rem] border border-white/20 overflow-hidden relative group shadow-2xl hover:scale-[1.01] hover:-translate-y-1 transition-all duration-700 cursor-zoom-in"
+          className="hidden md:block order-3 md:order-none lg:col-span-1 aspect-square glass-panel rounded-[3rem] border border-white/20 overflow-hidden relative group shadow-2xl hover:scale-[1.01] hover:-translate-y-1 transition-all duration-700 cursor-zoom-in"
         >
            <img loading="lazy" decoding="async" src={project.designDetailImage3 || project.researchImage1 || project.imageUrl} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" alt="Design Detail 3" />
         </div>
@@ -265,17 +265,17 @@ const ProjectDetailView: React.FC<{
               const isActive = activeSection === section.id;
               return (
                 <button key={section.id} onClick={() => scrollToSection(section.id)} className="group relative flex items-center justify-center">
-                  <div className={`absolute right-12 px-4 py-1.5 glass-panel rounded-full border border-orange-500/40 whitespace-nowrap opacity-0 translate-x-4 scale-90 group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-100 transition-all duration-500 shadow-2xl bg-black/90`}>
-                    <span className="text-[10px] font-black tracking-widest uppercase text-orange-500 font-sans">{section.label}</span>
+                  <div className={`absolute right-12 px-4 py-1.5 glass-panel rounded-full border border-silver-500/40 whitespace-nowrap opacity-0 translate-x-4 scale-90 group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-100 transition-all duration-500 shadow-2xl bg-black/90`}>
+                    <span className="text-[10px] font-black tracking-widest uppercase text-silver-500 font-sans">{section.label}</span>
                   </div>
-                  <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${isActive ? 'bg-orange-500 scale-[1.8] shadow-[0_0_10px_rgba(249,115,22,1)]' : 'bg-white/30 group-hover:bg-orange-500/60'}`} />
+                  <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${isActive ? 'bg-silver-500 scale-[1.8] shadow-[0_0_10px_rgba(163,168,175,1)]' : 'bg-white/30 group-hover:bg-orange-500/60'}`} />
                 </button>
               );
             })}
         </div>
       </nav>
 
-      <section id="hero" className="relative h-[110vh] w-full flex flex-col justify-end items-center px-6 pb-32 overflow-hidden">
+      <section id="hero" className="relative h-[65vh] md:h-[110vh] w-full flex flex-col justify-end items-center px-6 pb-10 md:pb-32 overflow-hidden">
         <motion.div
           style={{ y: useTransform(scrollY, [0, 1000], [0, 400]) }}
           className="absolute inset-0 -z-10"
@@ -298,38 +298,38 @@ const ProjectDetailView: React.FC<{
         </motion.div>
 
         <div className="max-w-7xl mx-auto w-full relative z-10 reveal-scale">
-          <button onClick={onBack} className="mb-12 glass px-6 py-2 rounded-full text-[10px] font-black tracking-[0.3em] uppercase flex items-center gap-3 hover:bg-orange-500/20 hover:border-orange-500/60 transition-all border-white/40 font-sans group backdrop-blur-xl shadow-xl reveal-left" style={{ transitionDelay: '200ms' }}>
-            <ChevronLeft className="w-4 h-4 text-orange-500 transition-transform group-hover:-translate-x-1" />
+          <button onClick={onBack} className="hidden md:flex mb-12 glass px-6 py-2 rounded-full text-[10px] font-black tracking-[0.3em] uppercase items-center gap-3 hover:bg-orange-500/20 hover:border-orange-500/60 transition-all border-white/40 font-sans group backdrop-blur-xl shadow-xl reveal-left" style={{ transitionDelay: '200ms' }}>
+            <ChevronLeft className="w-4 h-4 text-silver-500 transition-transform group-hover:-translate-x-1" />
             Case studies
           </button>
           <div className="flex flex-col gap-2 mb-6 reveal-left" style={{ transitionDelay: '400ms' }}>
-            <span className="text-[11px] font-black tracking-[0.4em] uppercase text-orange-500 block font-sans">{project.year} • PROJECT ARCHIVE</span>
+            <span className="text-[11px] font-black tracking-[0.4em] uppercase text-silver-500 block font-sans">{project.year} • PROJECT ARCHIVE</span>
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1] mb-0 font-sans text-white reveal-left" style={{ transitionDelay: '600ms' }}>{project.title}</h1>
         </div>
       </section>
 
-      <section id="overview" className="relative py-40 px-6 border-b border-white/10 overflow-hidden">
+      <section id="overview" className="relative py-20 md:py-40 px-6 border-b border-white/10 overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left: Description */}
             <div className="lg:col-span-8 reveal-left">
-              <div className="text-[11px] font-black tracking-[0.5em] uppercase text-orange-500 mb-8 font-sans flex items-center gap-4">
+              <div className="text-[11px] font-black tracking-[0.5em] uppercase text-silver-500 mb-8 font-sans flex items-center gap-4">
                 <span className="shrink-0">01 / Project Overview</span>
-                <div className="h-[1px] w-12 bg-orange-500/50"></div>
+                <div className="h-[1px] w-12 bg-silver-500/50"></div>
               </div>
               <p className="text-2xl md:text-3xl lg:text-4xl text-white leading-[1.2] font-bold tracking-tight font-display mb-8 transition-all">
                 {project.description}
               </p>
-              <p className="text-base md:text-lg text-white/70 font-light max-w-2xl mb-0 leading-relaxed italic border-l-2 border-orange-500/40 pl-6">
+              <p className="text-base md:text-lg text-white/70 font-light max-w-2xl mb-0 leading-relaxed italic border-l-2 border-silver-500/40 pl-6">
                 {project.designOverviewSubtext}
               </p>
             </div>
 
             {/* Right: Metadata Grid */}
             <div className="lg:col-span-4 pt-12 lg:pt-0 reveal-right" style={{ transitionDelay: '300ms' }}>
-              <div className="glass-panel p-8 rounded-[2.5rem] border border-white/10 flex flex-col gap-8 shadow-2xl">
-                <div className="grid grid-cols-2 lg:grid-cols-1 gap-8">
+              <div className="glass-panel p-5 md:p-8 rounded-[1.75rem] md:rounded-[2.5rem] border border-white/10 flex flex-col gap-5 md:gap-8 shadow-2xl">
+                <div className="grid grid-cols-2 lg:grid-cols-1 gap-5 md:gap-8">
                   {project.duration && (
                     <div className="flex flex-col gap-2">
                       <span className="text-[10px] font-bold text-white/50 uppercase tracking-[0.2em] font-sans">Duration</span>
@@ -371,7 +371,7 @@ const ProjectDetailView: React.FC<{
                       className="w-full glass py-4 rounded-2xl text-[10px] font-black tracking-[0.2em] uppercase text-center text-white hover:bg-orange-500/20 hover:border-orange-500/40 transition-all flex items-center justify-center gap-3 group/btn"
                     >
                       View Full Case Study
-                      <svg className="w-4 h-4 text-orange-500 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-silver-500 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </a>
@@ -381,13 +381,13 @@ const ProjectDetailView: React.FC<{
             </div>
           </div>
 
-          <div className="mt-40 reveal-scale" style={{ transitionDelay: '500ms' }} ref={parallaxRef}>
+          <div className="mt-10 md:mt-40 reveal-scale" style={{ transitionDelay: '500ms' }} ref={parallaxRef}>
             <div
               onClick={() => {
                 const isVideo = project.designMainVideo || (project.designMainImage && project.designMainImage.endsWith('.mp4'));
                 if (!isVideo) onExpandImage(project.designMainImage || project.imageUrl);
               }}
-              className={`relative aspect-[16/9] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl group ${(project.designMainVideo || (project.designMainImage && project.designMainImage.endsWith('.mp4'))) ? '' : 'cursor-zoom-in'}`}
+              className={`relative aspect-[4/3] md:aspect-[16/9] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl group ${(project.designMainVideo || (project.designMainImage && project.designMainImage.endsWith('.mp4'))) ? '' : 'cursor-zoom-in'}`}
             >
               <motion.div style={{ y }} className="absolute inset-x-0 -top-[10%] h-[120%] w-full">
                 {(project.designMainVideo || (project.designMainImage && project.designMainImage.endsWith('.mp4'))) ? (
@@ -413,16 +413,16 @@ const ProjectDetailView: React.FC<{
         </div>
       </section>
 
-      <section id="problem" className="py-40 md:py-60 px-6 relative border-b border-white/10">
+      <section id="problem" className="py-20 md:py-60 px-6 relative border-b border-white/10">
         <div className="max-w-5xl mx-auto">
           <div className="reveal-scale mb-20">
-            <div className="text-[11px] font-black tracking-[0.4em] uppercase text-orange-500 mb-8 font-sans">02 / The Challenge</div>
+            <div className="text-[11px] font-black tracking-[0.4em] uppercase text-silver-500 mb-8 font-sans">02 / The Challenge</div>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 text-white font-display">Defining the <span className="text-white/40 italic">Problem.</span></h2>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light mb-8 max-w-3xl">
               {project.challenge}
             </p>
             <div className="glass-panel p-6 md:p-8 rounded-[2rem] border border-white/20 bg-white/[0.02] reveal-scale max-w-2xl" style={{ transitionDelay: '200ms' }}>
-              <span className="text-[9px] font-bold text-orange-500 uppercase tracking-widest mb-3 block">Problem Statement</span>
+              <span className="text-[9px] font-bold text-silver-500 uppercase tracking-widest mb-3 block">Problem Statement</span>
               <p className="text-sm md:text-base text-white/90 font-medium leading-relaxed tracking-tight">
                 {project.problemStatement}
               </p>
@@ -456,32 +456,23 @@ const ProjectDetailView: React.FC<{
         </div>
       </section>
 
-      <section id="research" className="py-40 md:py-60 px-6 relative border-b border-white/10 overflow-hidden">
+      <section id="research" className="py-20 md:py-60 px-6 relative border-b border-white/10 overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 reveal">
             <div className="max-w-xl">
-              <div className="text-[11px] font-black tracking-[0.4em] uppercase text-orange-500 mb-8 font-sans">03 / Discovery & Research</div>
+              <div className="text-[11px] font-black tracking-[0.4em] uppercase text-silver-500 mb-8 font-sans">03 / Discovery & Research</div>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 text-white font-display">User Insights.</h2>
               <p className="text-base md:text-lg text-white/70 leading-relaxed font-light">
                 {project.researchOverview}
               </p>
             </div>
-            <div className="flex flex-col items-end reveal-right" style={{ transitionDelay: '200ms' }}>
+            <div className="flex flex-col items-start md:items-end reveal-right" style={{ transitionDelay: '200ms' }}>
               <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">Methods</span>
-              <div className="text-white font-medium text-right max-w-[200px]">{project.methods}</div>
+              <div className="text-white font-medium text-left md:text-right max-w-[200px]">{project.methods}</div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            {[project.researchInsights, project.researchInsight2, project.researchInsight3].map((insight, i) => insight && (
-              <div key={i} className="glass-panel p-10 rounded-[2.5rem] border border-white/20 hover:border-orange-500/30 transition-all duration-500 group shadow-2xl reveal-scale" style={{ transitionDelay: `${i * 200}ms` }}>
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 border border-orange-500/30 flex items-center justify-center mb-8 text-orange-500 font-bold font-display">0{i+1}</div>
-                <p className="text-base text-white leading-relaxed font-medium tracking-tight">{insight}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 mb-20">
             <div className={`grid grid-cols-1 ${project.researchImage2 ? 'md:grid-cols-2' : ''} gap-8`}>
               {project.researchImage1 && (
                 <div
@@ -521,7 +512,7 @@ const ProjectDetailView: React.FC<{
                       {project.researchImage1.map((_, i) => (
                         <div
                           key={i}
-                          className={`w-1 h-1 rounded-full transition-all duration-300 ${i === researchImage1Index ? 'bg-orange-500 w-3' : 'bg-white/20'}`}
+                          className={`w-1 h-1 rounded-full transition-all duration-300 ${i === researchImage1Index ? 'bg-silver-500 w-3' : 'bg-white/20'}`}
                         />
                       ))}
                     </div>
@@ -602,7 +593,7 @@ const ProjectDetailView: React.FC<{
                     {(project.researchCarousel || [project.researchImage3, project.researchImage4].filter(Boolean)).map((_, i) => (
                       <div
                         key={i}
-                        className={`w-1 h-1 rounded-full transition-all duration-300 ${i === (researchSlideIndex % (project.researchCarousel?.length || [project.researchImage3, project.researchImage4].filter(Boolean).length)) ? 'bg-orange-500 w-3' : 'bg-white/20'}`}
+                        className={`w-1 h-1 rounded-full transition-all duration-300 ${i === (researchSlideIndex % (project.researchCarousel?.length || [project.researchImage3, project.researchImage4].filter(Boolean).length)) ? 'bg-silver-500 w-3' : 'bg-white/20'}`}
                       />
                     ))}
                   </div>
@@ -613,68 +604,79 @@ const ProjectDetailView: React.FC<{
               </div>
             )}
           </div>
-        </div>
-      </section>
 
-      <section id="solution" className="py-40 md:py-60 px-6 relative border-b border-white/10 bg-white/[0.02] overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-24 reveal-scale">
-            <div className="text-[11px] font-black tracking-[0.4em] uppercase text-orange-500 mb-8 font-sans">04 / The Solution</div>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white font-display">Strategic <span className="text-white/40 italic">Intervention.</span></h2>
-            <p className="text-lg md:text-xl text-white/50 leading-relaxed font-light max-w-2xl mx-auto">
-              {project.solution}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {project.features?.map((feature, i) => (
-              <div
-                key={i}
-                className="glass-panel p-10 rounded-[2.5rem] border border-white/10 hover:border-orange-500/30 transition-all duration-500 group reveal-scale shadow-2xl"
-                style={{ transitionDelay: `${i * 150}ms` }}
-              >
-                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 mb-8 group-hover:bg-orange-500 group-hover:text-black transition-all duration-500">
-                  <span className="text-sm font-black font-display">0{i+1}</span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-4 font-display group-hover:text-orange-500 transition-colors">{feature.title}</h3>
-                <p className="text-sm text-white/50 leading-relaxed font-light">
-                  {feature.description}
-                </p>
+          <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-8">
+            {[project.researchInsights, project.researchInsight2, project.researchInsight3].map((insight, i) => insight && (
+              <div key={i} className="flex flex-row items-start gap-4 md:block md:glass-panel md:p-10 md:rounded-[2.5rem] md:border md:border-white/20 md:hover:border-orange-500/30 transition-all duration-500 group md:shadow-2xl reveal-scale" style={{ transitionDelay: `${i * 200}ms` }}>
+                <div className="w-10 h-10 rounded-full bg-silver-500/10 border border-silver-500/30 flex items-center justify-center shrink-0 md:mb-8 text-silver-500 font-bold font-display">0{i+1}</div>
+                <p className="text-base text-white leading-relaxed font-medium tracking-tight">{insight}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="process" className="py-40 md:py-60 px-6 relative border-b border-white/10 overflow-hidden">
+      <section id="solution" className="py-20 md:py-60 px-6 relative border-b border-white/10 bg-white/[0.02] overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-left md:text-center mb-10 md:mb-24 reveal-scale">
+            <div className="text-[11px] font-black tracking-[0.4em] uppercase text-silver-500 mb-8 font-sans">04 / The Solution</div>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white font-display">Strategic <span className="text-white/40 italic">Intervention.</span></h2>
+            <p className="text-lg md:text-xl text-white/50 leading-relaxed font-light max-w-2xl md:mx-auto">
+              {project.solution}
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8">
+            {project.features?.map((feature, i) => (
+              <div
+                key={i}
+                className="flex flex-row items-start gap-4 md:block md:glass-panel md:p-10 md:rounded-[2.5rem] md:border md:border-white/10 md:hover:border-orange-500/30 transition-all duration-500 group reveal-scale md:shadow-2xl"
+                style={{ transitionDelay: `${i * 150}ms` }}
+              >
+                <div className="w-12 h-12 rounded-2xl bg-silver-500/10 border border-silver-500/20 flex items-center justify-center text-silver-500 shrink-0 md:mb-8 group-hover:bg-orange-500 group-hover:text-black transition-all duration-500">
+                  <span className="text-sm font-black font-display">0{i+1}</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2 md:mb-4 font-display group-hover:text-orange-500 transition-colors">{feature.title}</h3>
+                  <p className="text-sm text-white/50 leading-relaxed font-light">
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="process" className="py-20 md:py-60 px-6 relative border-b border-white/10 overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-32 reveal text-center">
-            <div className="text-[11px] font-black tracking-[0.4em] uppercase text-orange-500 mb-8 font-sans">05 / Execution Process</div>
+          <div className="mb-32 reveal text-left md:text-center">
+            <div className="text-[11px] font-black tracking-[0.4em] uppercase text-silver-500 mb-8 font-sans">05 / Execution Process</div>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white font-display">How it was <span className="text-white/40 italic">Built.</span></h2>
-            <p className="text-base md:text-lg text-white/50 leading-relaxed font-light max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-white/50 leading-relaxed font-light max-w-2xl md:mx-auto">
               {project.processDescription}
             </p>
           </div>
 
           <div className="relative">
             {/* Central Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-orange-500/50 via-white/10 to-transparent -translate-x-1/2 hidden md:block"></div>
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-silver-500/50 via-white/10 to-transparent -translate-x-1/2 hidden md:block"></div>
 
-            <div className="flex flex-col gap-48 md:gap-64">
+            <div className="flex flex-col gap-16 md:gap-64">
               {project.processSteps?.map((step, i) => (
                 <div key={i} className={`relative flex flex-col md:flex-row items-center gap-12 md:gap-24 ${i % 2 === 1 ? 'md:flex-row-reverse' : ''} group`}>
                   {/* Step Connector Node */}
                   <div className="absolute left-4 md:left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full bg-[#080808] border border-white/20 flex items-center justify-center z-10 shadow-[0_0_30px_rgba(0,0,0,1)] group-hover:border-orange-500 transition-all duration-700 hidden md:flex reveal-scale">
-                     <div className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-orange-500 group-hover:scale-150 transition-all duration-500 shadow-[0_0_15px_rgba(249,115,22,0.5)]"></div>
+                     <div className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-orange-500 group-hover:scale-150 transition-all duration-500 shadow-[0_0_15px_rgba(163,168,175,0.5)]"></div>
                   </div>
 
                   {/* Content Side */}
                   <div className={`w-full md:w-1/2 ${i % 2 === 1 ? 'md:text-right md:pl-16' : 'md:text-left md:pr-16'} ${i % 2 === 1 ? 'reveal-right' : 'reveal-left'}`}>
                      <div className={`flex flex-col ${i % 2 === 1 ? 'md:items-end' : 'md:items-start'}`}>
-                        <span className="text-[10px] font-black text-orange-500 uppercase tracking-[0.4em] mb-4 block font-sans">Phase 0{i+1}</span>
-                        <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 font-display leading-none">{step.title}</h3>
-                        <div className={`h-[2px] w-12 bg-orange-500/30 mb-8 ${i % 2 === 1 ? 'md:ml-auto' : ''}`}></div>
-                        <p className="text-lg text-white/40 font-bold uppercase tracking-widest mb-8 font-sans">{step.subtitle}</p>
+                        <span className="text-[10px] font-black text-silver-500 uppercase tracking-[0.4em] mb-4 block font-sans">Phase 0{i+1}</span>
+                        <h3 className="text-2xl md:text-5xl font-bold text-white mb-6 font-display leading-none">{step.title}</h3>
+                        <div className={`h-[2px] w-12 bg-silver-500/30 mb-8 ${i % 2 === 1 ? 'md:ml-auto' : ''}`}></div>
+                        <p className="hidden md:block text-lg text-white/40 font-bold uppercase tracking-widest mb-8 font-sans">{step.subtitle}</p>
                         <p className="text-base md:text-lg text-white/70 leading-relaxed font-light tracking-tight max-w-md">
                           {step.ideationText}
                         </p>
@@ -701,14 +703,14 @@ const ProjectDetailView: React.FC<{
         </div>
       </section>
 
-      <section id="design" className="py-40 md:py-60 px-6 relative border-b border-white/10">
-        <div className="max-w-5xl mx-auto flex flex-col items-center">
-          <div className="text-[11px] font-black tracking-[0.4em] uppercase text-orange-500 mb-8 font-sans reveal">06 / UI & Design System</div>
+      <section id="design" className="py-20 md:py-60 px-6 relative border-b border-white/10">
+        <div className="max-w-5xl mx-auto flex flex-col items-start md:items-center">
+          <div className="text-[11px] font-black tracking-[0.4em] uppercase text-silver-500 mb-8 font-sans reveal">06 / UI & Design System</div>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 text-white font-display reveal" style={{ transitionDelay: '150ms' }}>Visual Language.</h2>
-          <p className="text-base md:text-lg text-white leading-relaxed mb-12 font-light max-w-2xl text-center italic reveal" style={{ transitionDelay: '300ms' }}>
+          <p className="text-base md:text-lg text-white leading-relaxed mb-12 font-light max-w-2xl text-left md:text-center italic reveal" style={{ transitionDelay: '300ms' }}>
             {project.designRational || "Strategic scale and weight balancing to establish hierarchical clarity."}
           </p>
-          <div className="reveal-scale" style={{ transitionDelay: '450ms' }}>
+          <div className="w-full reveal-scale" style={{ transitionDelay: '450ms' }}>
             <VisualLanguageGrid
               project={project}
               onImageClick={(src) => onExpandImage(src)}
@@ -720,16 +722,16 @@ const ProjectDetailView: React.FC<{
         </div>
       </section>
 
-      <section id="impact" className="py-40 md:py-60 px-6 relative overflow-hidden border-b border-white/10">
+      <section id="impact" className="py-20 md:py-60 px-6 relative overflow-hidden border-b border-white/10">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="text-[11px] font-black tracking-[0.4em] uppercase text-orange-500 mb-6 font-sans reveal">07 / Outcomes & Impact</div>
+          <div className="text-left md:text-center mb-16">
+            <div className="text-[11px] font-black tracking-[0.4em] uppercase text-silver-500 mb-6 font-sans reveal">07 / Outcomes & Impact</div>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-display reveal" style={{ transitionDelay: '200ms' }}>Project Impact.</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {project.impactStats?.map((stat, i) => (
               <div key={i} className="glass-panel p-10 rounded-[2.5rem] border border-white/30 hover:border-orange-500/50 transition-all duration-500 group shadow-2xl bg-white/[0.04] reveal-scale" style={{ transitionDelay: `${i * 200 + 400}ms` }}>
-                <div className="text-5xl font-bold text-orange-500 mb-4 font-display group-hover:scale-110 transition-transform origin-left">{stat.value}</div>
+                <div className="text-5xl font-bold text-silver-500 mb-4 font-display group-hover:scale-110 transition-transform origin-left">{stat.value}</div>
                 <div className="text-sm font-bold text-white uppercase tracking-widest mb-4 font-sans">{stat.label}</div>
                 <p className="text-white/70 text-sm leading-relaxed font-light">{stat.description}</p>
               </div>
@@ -738,33 +740,24 @@ const ProjectDetailView: React.FC<{
         </div>
       </section>
 
-      <section id="reflection" className="py-40 md:py-60 px-6 relative border-b border-white/10">
+      <section id="reflection" className="py-20 md:py-60 px-6 relative border-b border-white/10">
         <div className="max-w-3xl mx-auto">
-          <div className="text-[11px] font-black tracking-[0.4em] uppercase text-orange-500 mb-8 font-sans reveal">08 / Reflection & Next Steps</div>
+          <div className="text-[11px] font-black tracking-[0.4em] uppercase text-silver-500 mb-8 font-sans reveal">08 / Reflection & Next Steps</div>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-10 text-white font-display reveal" style={{ transitionDelay: '200ms' }}>Final Thoughts.</h2>
 
           <div className="flex flex-col gap-16">
             <div className="glass-panel p-10 md:p-12 rounded-[3rem] border border-white/20 bg-white/[0.02] reveal-scale" style={{ transitionDelay: '400ms' }}>
-              <span className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-6 block font-sans">Retrospective</span>
+              <span className="text-[10px] font-bold text-silver-500 uppercase tracking-widest mb-6 block font-sans">Retrospective</span>
               <p className="text-lg md:text-xl text-white leading-relaxed font-light italic tracking-tight whitespace-pre-wrap">
                 {project.reflection}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-              <div className="reveal-left" style={{ transitionDelay: '600ms' }}>
-                <h3 className="text-2xl font-bold text-white mb-6 font-display">Next Steps</h3>
-                <p className="text-base text-white/70 leading-relaxed font-light tracking-tight">
-                  {project.nextSteps}
-                </p>
-              </div>
-              <div className="glass-panel p-8 rounded-[2rem] border border-white/20 flex flex-col items-center justify-center text-center reveal-right" style={{ transitionDelay: '800ms' }}>
-                <div className="w-16 h-16 rounded-full bg-orange-500/10 border border-orange-500/30 flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                </div>
-                <h4 className="text-lg font-bold text-white mb-2 font-display">Ready for Scale</h4>
-                <p className="text-sm text-white/40 font-sans uppercase tracking-widest">Production Grade Architecture</p>
-              </div>
+            <div className="reveal-left" style={{ transitionDelay: '600ms' }}>
+              <h3 className="text-2xl font-bold text-white mb-6 font-display">Next Steps</h3>
+              <p className="text-base text-white/70 leading-relaxed font-light tracking-tight">
+                {project.nextSteps}
+              </p>
             </div>
           </div>
         </div>
@@ -785,12 +778,12 @@ const ProjectDetailView: React.FC<{
         )}
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] group-hover:backdrop-blur-none transition-all duration-700"></div>
         <div className="relative z-10 text-center flex flex-col items-center px-6">
-          <span className="text-[11px] font-black tracking-[0.5em] text-orange-500 uppercase mb-8 font-sans">Next Perspective</span>
+          <span className="text-[11px] font-black tracking-[0.5em] text-silver-500 uppercase mb-8 font-sans">Next Perspective</span>
           <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tight font-display transition-all duration-1000 group-hover:scale-105 leading-none">
             {nextProject.title}
           </h2>
           <div className="mt-12 w-16 h-16 rounded-full border-2 border-white/30 flex items-center justify-center transition-all group-hover:border-orange-500/60 group-hover:bg-white/15 group-hover:scale-110 shadow-2xl backdrop-blur-xl">
-             <svg className="w-8 h-8 text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <svg className="w-8 h-8 text-silver-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
              </svg>
           </div>

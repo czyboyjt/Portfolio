@@ -32,7 +32,7 @@ const ProjectStack: React.FC<ProjectStackProps> = React.memo(({ projects, onProj
   const visibleProjects = getVisibleProjects();
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto h-[500px] flex items-center justify-center perspective-1000">
+    <div className="relative w-full max-w-4xl mx-auto h-auto md:h-[500px] flex flex-col items-center justify-center perspective-1000">
       <div className="relative w-[300px] md:w-[450px] h-[400px] md:h-[500px]">
         <AnimatePresence mode="popLayout">
           {visibleProjects.map((project, index) => {
@@ -95,7 +95,7 @@ const ProjectStack: React.FC<ProjectStackProps> = React.memo(({ projects, onProj
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-700" />
                   
                   <div className="absolute bottom-10 left-10 right-10">
-                    <div className="inline-block glass px-3 py-1 rounded-full border border-white/10 backdrop-blur-xl mb-3">
+                    <div className="hidden md:inline-block glass px-3 py-1 rounded-full border border-white/10 backdrop-blur-xl mb-3">
                       <span className="text-[9px] font-bold tracking-[0.2em] text-white/90 uppercase font-sans">
                         {project.category}
                       </span>
@@ -120,6 +120,13 @@ const ProjectStack: React.FC<ProjectStackProps> = React.memo(({ projects, onProj
         </AnimatePresence>
       </div>
 
+      {/* Category Label - Mobile only, plain text beneath the card */}
+      <div className="md:hidden mt-4">
+        <span className="text-[9px] font-bold tracking-[0.2em] text-white/50 uppercase font-sans">
+          {visibleProjects[0]?.category}
+        </span>
+      </div>
+
       {/* Navigation Controls */}
       <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-6 z-20">
         <button 
@@ -133,7 +140,7 @@ const ProjectStack: React.FC<ProjectStackProps> = React.memo(({ projects, onProj
           {projects.map((_, i) => (
             <div 
               key={i} 
-              className={`h-1 rounded-full transition-all duration-500 ${i === currentIndex ? 'w-8 bg-orange-500' : 'w-2 bg-white/20'}`}
+              className={`h-1 rounded-full transition-all duration-500 ${i === currentIndex ? 'w-8 bg-silver-500' : 'w-2 bg-white/20'}`}
             />
           ))}
         </div>

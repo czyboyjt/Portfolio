@@ -7,13 +7,11 @@ interface CustomCursorProps {
 }
 
 const CustomCursor: React.FC<CustomCursorProps> = ({ currentView }) => {
-  const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  
+
   // Coordinate tracking
   const mousePos = useRef({ x: 0, y: 0 });
   const ringPos = useRef({ x: 0, y: 0 });
-  const dotScale = useRef(1);
 
   const [hoverType, setHoverType] = useState<'none' | 'ui' | 'project'>('none');
   const [isVisible, setIsVisible] = useState(false);
@@ -27,28 +25,15 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ currentView }) => {
       const target = e.target as HTMLElement;
       if (target.closest('[data-cursor="project"]')) {
         setHoverType('project');
-        dotScale.current = 1.5;
       } else if (target.closest('button, a, .cursor-pointer, [class*="cursor-"], input, [role="button"]')) {
         setHoverType('ui');
-        dotScale.current = 1.25;
       } else {
         setHoverType('none');
-        dotScale.current = 1;
       }
     };
 
     const animate = () => {
-      // 1. Update Dot (Instant Sync)
-      // Note: CSS transition on transform is removed to ensure this is truly instant.
-      // The hover scale is baked into this same transform (rather than a Tailwind
-      // scale-* class) because Tailwind v4 compiles scale-* to the native CSS
-      // `scale` property, which composes with `transform` and would otherwise
-      // multiply this translate distance, offsetting the dot from the mouse.
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) scale(${dotScale.current})`;
-      }
-
-      // 2. Update Ring (Smooth Lerp)
+      // Update Ring (Smooth Lerp)
       const lerpFactor = 0.15;
       ringPos.current.x += (mousePos.current.x - ringPos.current.x) * lerpFactor;
       ringPos.current.y += (mousePos.current.y - ringPos.current.y) * lerpFactor;
@@ -86,22 +71,7 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ currentView }) => {
       case 'ui':
         return `${base} w-14 h-14 -ml-7 -mt-7 bg-white/10 border-white/80 shadow-[0_0_20px_rgba(255,255,255,0.15)]`;
       default:
-        return `${base} w-8 h-8 -ml-4 -mt-4 bg-transparent border-white/20`;
-    }
-  };
-
-  const getDotClasses = () => {
-    // CRITICAL: Removed 'transform' from the transition list. 
-    // This allows the dot to follow the mouse instantly without lag.
-    const base = "fixed top-0 left-0 w-1.5 h-1.5 rounded-full -ml-0.75 -mt-0.75 pointer-events-none will-change-transform transition-[background-color,box-shadow,width,height] duration-300";
-    
-    switch (hoverType) {
-      case 'project':
-        return `${base} bg-orange-500 shadow-[0_0_12px_rgba(249,115,22,1)]`;
-      case 'ui':
-        return `${base} bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]`;
-      default:
-        return `${base} bg-white shadow-none`;
+        return `${base} w-5 h-5 -ml-2.5 -mt-2.5 bg-transparent border-white/20`;
     }
   };
 
@@ -116,12 +86,6 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ currentView }) => {
           SELECT
         </span>
       </div>
-
-      {/* Precision Dot */}
-      <div 
-        ref={dotRef}
-        className={getDotClasses()}
-      />
     </div>
   );
 };

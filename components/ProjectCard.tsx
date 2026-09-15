@@ -38,7 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = React.memo(({ project, onClick }
       onClick={() => onClick?.(project)}
       className="group flex flex-col gap-4 cursor-pointer"
     >
-      <div className="relative aspect-[16/9] overflow-hidden rounded-[2.5rem] border border-white/5 transition-all duration-700 hover:border-white/20">
+      <div className="relative aspect-[5/4] md:aspect-[16/9] overflow-hidden rounded-[2.5rem] border border-white/5 transition-all duration-700 hover:border-white/20">
         {(project.previewVideoUrl || project.imageUrl?.endsWith('.mp4')) ? (
           <video
             ref={videoRef}
@@ -80,8 +80,8 @@ const ProjectCard: React.FC<ProjectCardProps> = React.memo(({ project, onClick }
         </div>
       </div>
       
-      {/* Caption Below - Revealed on Hover */}
-      <div className="px-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
+      {/* Caption Below - Always visible on mobile, revealed on hover from md up */}
+      <div className="px-2 opacity-100 translate-y-0 md:opacity-0 md:group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
         <p className="text-white/50 text-sm md:text-base leading-relaxed font-light line-clamp-2">
           {project.description}
         </p>
