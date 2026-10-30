@@ -14,14 +14,32 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ProjectDetailView = lazy(() => import('./components/ProjectDetailView'));
 
 const CinematicBackground: React.FC<{ mousePos: { x: number, y: number }, isDetail: boolean }> = React.memo(({ mousePos, isDetail }) => {
-  const stars = React.useMemo(() => [...Array(60)].map((_, i) => ({
+  // Touch devices: the cursor glow and large animated blur layers are very expensive
+  // to composite on phones (can freeze/crash mobile Safari), so render a static, light version.
+  const [isTouch] = useState(() =>
+    typeof window !== 'undefined' && !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  );
+
+  const stars = React.useMemo(() => [...Array(isTouch ? 0 : 60)].map((_, i) => ({
     width: Math.random() * 2 + 'px',
     height: Math.random() * 2 + 'px',
     top: Math.random() * 100 + '%',
     left: Math.random() * 100 + '%',
     delay: Math.random() * 5 + 's',
     duration: (Math.random() * 5 + 4) + 's'
-  })), []);
+  })), [isTouch]);
+
+  if (isTouch) {
+    return (
+      <div
+        className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#080808]"
+        style={{
+          backgroundImage:
+            'radial-gradient(ellipse 80% 40% at 80% 10%, rgba(148,163,184,0.10), transparent 70%), radial-gradient(ellipse 80% 40% at 10% 90%, rgba(226,232,240,0.06), transparent 70%)',
+        }}
+      />
+    );
+  }
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#080808]">

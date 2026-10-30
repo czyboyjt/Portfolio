@@ -120,7 +120,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden fixed inset-0 z-40 bg-[#080808]/98 backdrop-blur-xl transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 z-40 bg-[#080808]/98 transition-all duration-300 ${
           isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
