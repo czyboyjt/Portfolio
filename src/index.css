@@ -1,8 +1,143 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Satoshi is the one sans for everything, including the small "mono" detail text */
 @theme {
-  --color-silver-200: #E8E9EB;
-  --color-silver-400: #B8BCC2;
-  --color-silver-500: #A3A8AF;
-  --color-silver-600: #82868D;
+  --font-sans: 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+
+  /* colour: one cream on near-black, then one accent per project (see the design-system page) */
+  --color-cream: #f4f3f0;
+  --color-base: #08080a;
+  --color-ink: #050505;
+  --color-accent-talos: #05df72;
+  --color-accent-gmc: #e0327f;
+  --color-accent-marketeq: #d6dae0;
+  --color-accent-vocalii: #21e8ff;
+  --color-accent-integrate: #9d9df2;
+  --color-accent-seerlight: #5e90fb;
+  --color-accent-muskegon: #e5383b;
+
+  /* type scale (text-display, text-headline, text-label, text-body, text-caption) */
+  --text-display: 11rem;
+  --text-headline: 2.6rem;
+  --text-label: 1.3rem;
+  --text-body: 1.2rem;
+  --text-caption: 0.6875rem;
+
+  /* shape and depth */
+  --radius-frame: 2px;
+  --radius-pill: 9999px;
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --shadow-pill: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-sheet: 0 24px 60px rgba(0, 0, 0, 0.65);
+
+  /* easing: soft ease-out for things that arrive, symmetrical for things that travel */
+  --ease-arrive: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-travel: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* spacing steps and durations, as plain variables (they do not generate utility classes) */
+:root {
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 56px;
+  --space-6: 96px;
+  --dur-press: 200ms;
+  --dur-hover: 500ms;
+  --dur-travel: 850ms;
+  --dur-reveal: 1100ms;
+}
+
+@layer base {
+  :root {
+    --font-display: 'Satoshi', sans-serif;
+    --font-body: 'Satoshi', sans-serif;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-editorial-serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+}
+
+@keyframes clothWave {
+  0%, 100% {
+    transform: perspective(600px) rotateY(-1.5deg) skewY(-0.6deg) scale(1);
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+  }
+  50% {
+    transform: perspective(600px) rotateY(2deg) skewY(0.7deg) scale(1.02);
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.18));
+  }
+}
+
+.animate-cloth-wave {
+  animation: clothWave 5s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 10, 12, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Custom cursor styling for fine pointers */
+@media (pointer: fine) {
+  body, button, a, [role="button"], input, textarea {
+    cursor: none !important;
+  }
+}
+
+/* The project stage recedes while a case study opens or closes (see utils/stagePull.ts) */
+.stage-pullable {
+  /* coming back is slower than leaving */
+  transition:
+    transform 1.3s cubic-bezier(0.33, 0, 0.2, 1),
+    filter 1.3s cubic-bezier(0.33, 0, 0.2, 1),
+    opacity 1.3s cubic-bezier(0.33, 0, 0.2, 1);
+}
+:root[data-stage-pull='1'] .stage-pullable {
+  transition-duration: 0.7s;
+  transform: scale(0.95);
+  filter: blur(7px);
+  opacity: 0.4;
+}
+
+/* The project list and its labels slide out to the left while a case study is open */
+.pull-left {
+  transition:
+    transform 1.4s cubic-bezier(0.33, 0, 0.2, 1) 0.2s,
+    opacity 1.4s cubic-bezier(0.33, 0, 0.2, 1) 0.2s;
+}
+:root[data-stage-pull='1'] .pull-left {
+  transition-duration: 0.7s;
+  transition-delay: 0s;
+  transform: translateX(-70px);
+  opacity: 0;
 }

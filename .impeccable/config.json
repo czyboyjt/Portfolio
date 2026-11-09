@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gray-on-color",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-09T00:04:27.873Z",
+        "reason": "assistant: false positive, line 23 is the existing body class (text-neutral-100 on bg-[#08080a]), light text on near-black, not gray on a colour"
+      }
+    ]
+  }
+}
