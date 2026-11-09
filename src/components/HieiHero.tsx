@@ -214,22 +214,28 @@ export const HieiHero: React.FC<HieiHeroProps> = ({
   // the painting waits dark, soft and a little large while the welcome holds the screen, then comes into focus
   const lifted = useIntroLifted();
 
-  // On a phone the wide painting is cropped to a tall slice, so tilting the phone moves the slice: it opens on the man
-  // at the laptop (PAN_START, as a % of the painting's width), tilting left shows the left of the painting and tilting
-  // right the right. Where you hold the phone when it starts counts as level. Android phones share tilt freely; iPhones
-  // ask once, on the first tap, and without a yes (or with reduced motion) the picture just stays on the man.
+  // On a phone the wide painting is cropped to a tall slice that stays framed on the man at the laptop (PAN_START, as a
+  // % of the painting's width). Tilting the phone only nudges that view a little: left and right slide the painting a
+  // few % (the picture is wider than the screen, so no edge ever shows), up and down move it a few pixels (the layer has
+  // bleed for that). Where you hold the phone when it starts counts as level. Android phones share tilt freely; iPhones
+  // ask once, on the first tap, and without a yes (or with reduced motion) the picture just stays put.
   const PAN_START = 80;
-  const TILT_GAIN = 2.3; // % of the painting per degree of lean
+  const MAX_PAN = 5; // % of the painting, each way
+  const MAX_RISE = 14; // px, each way
+  const FULL_LEAN = 20; // degrees of lean that reach the maximum
   const isPhone = React.useMemo(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches, []);
   const panRaw = useMotionValue(PAN_START);
   const panSmooth = useSpring(panRaw, { stiffness: 50, damping: 18 });
-  const panPos = useTransform(panSmooth, (v) => `${Math.max(0, Math.min(100, v))}% 50%`);
-  const level = React.useRef<number | null>(null);
+  const panPos = useTransform(panSmooth, (v) => `${v}% 50%`);
+  const riseRaw = useMotionValue(0);
+  const rise = useSpring(riseRaw, { stiffness: 50, damping: 18 });
+  const level = React.useRef<{ g: number; b: number } | null>(null);
   const onTilt = React.useRef((e: DeviceOrientationEvent) => {
-    if (e.gamma == null) return;
-    if (level.current == null) level.current = e.gamma;
-    const lean = Math.max(-45, Math.min(45, e.gamma - level.current));
-    panRaw.set(PAN_START + lean * TILT_GAIN);
+    if (e.gamma == null || e.beta == null) return;
+    if (level.current == null) level.current = { g: e.gamma, b: e.beta };
+    const clamp = (v: number) => Math.max(-1, Math.min(1, v / FULL_LEAN));
+    panRaw.set(PAN_START + clamp(e.gamma - level.current.g) * MAX_PAN);
+    riseRaw.set(clamp(e.beta - level.current.b) * MAX_RISE);
   });
   const listening = React.useRef(false);
   const listen = React.useCallback(() => {
@@ -363,7 +369,7 @@ export const HieiHero: React.FC<HieiHeroProps> = ({
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Layer 1: mouse parallax */}
         <motion.div
-          style={{ x: parX, y: parY }}
+          style={{ x: parX, y: isPhone ? rise : parY }}
           className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)]"
         >
           {/* Layer 2: scroll push-in */}
