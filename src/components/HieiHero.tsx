@@ -26,7 +26,7 @@ export interface StreakLine {
 // The paintings the landing hero cycles through, in order. Add more here (put the files in /public/assets) and they
 // crossfade one into the next; with a single entry nothing cycles.
 const HERO_IMAGES: { src: string; alt: string }[] = [
-  { src: '/assets/hero.png', alt: 'A painted classical hall open to a sunlit cloudscape, with a man working at a laptop' },
+  { src: '/assets/hero.webp', alt: 'A painted classical hall open to a sunlit cloudscape, with a man working at a laptop' },
 ];
 // How long each painting stays, and how long the crossfade between two takes
 const HERO_HOLD_MS = 8000;

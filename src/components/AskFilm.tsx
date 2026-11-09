@@ -110,7 +110,7 @@ export const AskFilm: React.FC<Props> = ({ skillId, items, onSkill, onOpen, scro
         {/* the painting from the landing page, very dark and soft, drifting a little as the camera moves */}
         <motion.img
           aria-hidden="true"
-          src="/assets/hero.png"
+          src="/assets/hero.webp"
           alt=""
           className="absolute -inset-[6%] h-[112%] w-[112%] max-w-none object-cover will-change-transform"
           style={{ x: paintX }}
