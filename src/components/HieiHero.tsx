@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  animate,
   motion,
   useMotionValue,
   useMotionValueEvent,
@@ -214,6 +215,77 @@ export const HieiHero: React.FC<HieiHeroProps> = ({
   // the painting waits dark, soft and a little large while the welcome holds the screen, then comes into focus
   const lifted = useIntroLifted();
 
+  // On a phone the wide painting is cropped to a tall slice, so the slice moves. It opens on the man at the laptop
+  // (PAN_START, as a % of the painting's width), then drifts slowly across to the left side and back. A finger can drag
+  // it, and on phones that report tilt (no permission needed) leaning the phone nudges it too. The drift picks up again
+  // a moment after the finger lifts.
+  const PAN_START = 80;
+  const PAN_FAR = 22;
+  const isPhone = React.useMemo(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches, []);
+  const panBase = useMotionValue(PAN_START);
+  const tiltRaw = useMotionValue(0);
+  const tilt = useSpring(tiltRaw, { stiffness: 60, damping: 20 });
+  const panPos = useTransform([panBase, tilt], ([b, t]: number[]) => `${Math.max(0, Math.min(100, b + t))}% 50%`);
+  const driftRef = React.useRef<{ stop: () => void } | null>(null);
+  const goRef = React.useRef<() => void>(() => {});
+  const resumeTimer = React.useRef<number | undefined>(undefined);
+  React.useEffect(() => {
+    if (!isPhone || reduceMotion || !lifted) return;
+    let stopped = false;
+    const go = () => {
+      if (stopped) return;
+      const from = panBase.get();
+      const to = from > 51 ? PAN_FAR : PAN_START;
+      driftRef.current = animate(panBase, to, {
+        duration: Math.max(4, Math.abs(to - from) / 3.2),
+        ease: [0.45, 0, 0.55, 1],
+        onComplete: go,
+      });
+    };
+    goRef.current = go;
+    const first = window.setTimeout(go, 1800);
+    return () => {
+      stopped = true;
+      window.clearTimeout(first);
+      window.clearTimeout(resumeTimer.current);
+      driftRef.current?.stop();
+    };
+  }, [isPhone, reduceMotion, lifted, panBase]);
+  React.useEffect(() => {
+    // iPhones ask permission before sharing tilt, so only phones that share it freely get the lean
+    const DOE = (window as unknown as { DeviceOrientationEvent?: { requestPermission?: unknown } }).DeviceOrientationEvent;
+    if (!isPhone || reduceMotion || !DOE || typeof DOE.requestPermission === 'function') return;
+    const onTilt = (e: DeviceOrientationEvent) => {
+      if (e.gamma == null) return;
+      tiltRaw.set(Math.max(-25, Math.min(25, e.gamma)) * 0.35);
+    };
+    window.addEventListener('deviceorientation', onTilt);
+    return () => window.removeEventListener('deviceorientation', onTilt);
+  }, [isPhone, reduceMotion, tiltRaw]);
+  const touch = React.useRef<{ x: number; y: number; pan: number; axis: '' | 'x' | 'y' } | null>(null);
+  const onPanStart = (e: React.TouchEvent) => {
+    if (!isPhone) return;
+    touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, pan: panBase.get(), axis: '' };
+  };
+  const onPanMove = (e: React.TouchEvent) => {
+    const t = touch.current;
+    if (!t) return;
+    const dx = e.touches[0].clientX - t.x;
+    const dy = e.touches[0].clientY - t.y;
+    if (!t.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 8) t.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    if (t.axis !== 'x') return;
+    driftRef.current?.stop();
+    window.clearTimeout(resumeTimer.current);
+    const h = sectionRef.current?.offsetHeight ?? window.innerHeight;
+    const range = Math.max(1, h * (16 / 9) - window.innerWidth);
+    panBase.set(Math.max(0, Math.min(100, t.pan - (dx / range) * 100)));
+  };
+  const onPanEnd = () => {
+    const t = touch.current;
+    touch.current = null;
+    if (t?.axis === 'x' && !reduceMotion) resumeTimer.current = window.setTimeout(() => goRef.current(), 2500);
+  };
+
   // Cycle through the paintings. It pauses while the tab is hidden and does not run for people who prefer
   // reduced motion.
   const [heroIndex, setHeroIndex] = React.useState(0);
@@ -313,6 +385,11 @@ export const HieiHero: React.FC<HieiHeroProps> = ({
       ref={sectionRef}
       onMouseMove={canHover && !reduceMotion ? handleLightMove : undefined}
       onMouseLeave={canHover && !reduceMotion ? () => lightOpacity.set(0) : undefined}
+      onTouchStart={onPanStart}
+      onTouchMove={onPanMove}
+      onTouchEnd={onPanEnd}
+      onTouchCancel={onPanEnd}
+      style={isPhone ? { touchAction: 'pan-y' } : undefined}
       className="relative w-full h-screen min-h-[640px] max-h-[1080px] overflow-hidden select-none bg-[#0a0908] flex flex-col justify-end"
     >
       {/* Background image */}
@@ -345,14 +422,15 @@ export const HieiHero: React.FC<HieiHeroProps> = ({
                 transition={{ duration: lifted ? 1.9 : 0, ease: [0.22, 1, 0.36, 1] }}
               >
                 {HERO_IMAGES.map((img, i) => (
-                  <img
+                  <motion.img
                     key={img.src}
                     src={img.src}
                     alt={img.alt}
                     aria-hidden={i !== heroIndex}
                     decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    className="absolute inset-0 w-full h-full object-cover"
                     style={{
+                      objectPosition: isPhone ? panPos : '50% 50%',
                       opacity: i === heroIndex ? 1 : 0,
                       transition: `opacity ${HERO_FADE_S}s ease-in-out`,
                     }}

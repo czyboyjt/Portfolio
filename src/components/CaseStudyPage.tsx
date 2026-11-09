@@ -38,7 +38,9 @@ const GalleryFrame: React.FC<{ url?: string; title: string; description: string;
 }) => (
   <figure>
     <RevealFrame from="bottom" className={aspect}>
-      {url ? (
+      {url && /\.(mp4|webm)$/i.test(url) ? (
+        <video src={url} autoPlay muted loop playsInline preload="metadata" aria-label={title} className="absolute inset-0 w-full h-full object-cover" />
+      ) : url ? (
         <img src={url} alt={title} decoding="async" className="absolute inset-0 w-full h-full object-cover" />
       ) : (
         <svg
