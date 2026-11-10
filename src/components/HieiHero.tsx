@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  animate,
   motion,
   useMotionValue,
   useMotionValueEvent,
@@ -223,19 +224,33 @@ export const HieiHero: React.FC<HieiHeroProps> = ({
   const MAX_PAN = 5; // % of the painting, each way
   const MAX_RISE = 14; // px, each way
   const FULL_LEAN = 20; // degrees of lean that reach the maximum
+  const DEAD_ZONE = 2; // degrees of wobble ignored, so a phone held in the hand does not shimmer
   const isPhone = React.useMemo(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches, []);
   const panRaw = useMotionValue(PAN_START);
-  const panSmooth = useSpring(panRaw, { stiffness: 50, damping: 18 });
+  // heavy and slow: a soft spring with some mass, so the picture follows late and glides to a stop like a camera on a dolly
+  const WEIGHT = { stiffness: 14, damping: 12, mass: 2.2 };
+  const panSmooth = useSpring(panRaw, WEIGHT);
   const panPos = useTransform(panSmooth, (v) => `${v}% 50%`);
   const riseRaw = useMotionValue(0);
-  const rise = useSpring(riseRaw, { stiffness: 50, damping: 18 });
+  const rise = useSpring(riseRaw, WEIGHT);
+  // after the welcome the picture eases in a few % and holds, like a camera settling onto its subject
+  const push = useMotionValue(1);
+  React.useEffect(() => {
+    if (!isPhone || reduceMotion || !lifted) return;
+    const c = animate(push, 1.04, { duration: 7, ease: [0.22, 1, 0.36, 1] });
+    return () => c.stop();
+  }, [isPhone, reduceMotion, lifted, push]);
   const level = React.useRef<{ g: number; b: number } | null>(null);
   const onTilt = React.useRef((e: DeviceOrientationEvent) => {
     if (e.gamma == null || e.beta == null) return;
     if (level.current == null) level.current = { g: e.gamma, b: e.beta };
-    const clamp = (v: number) => Math.max(-1, Math.min(1, v / FULL_LEAN));
-    panRaw.set(PAN_START + clamp(e.gamma - level.current.g) * MAX_PAN);
-    riseRaw.set(clamp(e.beta - level.current.b) * MAX_RISE);
+    // lean in degrees -> -1..1: wobble inside the dead zone is ignored, and the move eases out toward its limit
+    const shape = (d: number) => {
+      const n = Math.min(1, Math.max(0, Math.abs(d) - DEAD_ZONE) / (FULL_LEAN - DEAD_ZONE));
+      return Math.sign(d) * (1 - (1 - n) * (1 - n));
+    };
+    panRaw.set(PAN_START + shape(e.gamma - level.current.g) * MAX_PAN);
+    riseRaw.set(shape(e.beta - level.current.b) * MAX_RISE);
   });
   const listening = React.useRef(false);
   const listen = React.useCallback(() => {
@@ -369,7 +384,7 @@ export const HieiHero: React.FC<HieiHeroProps> = ({
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Layer 1: mouse parallax */}
         <motion.div
-          style={{ x: parX, y: isPhone ? rise : parY }}
+          style={{ x: parX, y: isPhone ? rise : parY, scale: isPhone ? push : 1 }}
           className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)]"
         >
           {/* Layer 2: scroll push-in */}

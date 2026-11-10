@@ -157,8 +157,8 @@ export const ContactSection: React.FC = () => (
 // ---------------------------------------------------------------------------------------------
 export const ContactPill: React.FC<{ hidden?: boolean; onAsk?: (skillId: string, from?: AskHandoff) => void }> = ({ hidden = false, onAsk }) => {
   const reduce = !!useReducedMotion();
-  // on a phone the pill sits in the top-right corner and the card and nudge open downwards from it; on larger
-  // screens it is bottom-right and they open upwards
+  // on a phone the pill sits in the top-right corner and the card opens downwards from it; on larger
+  // screens it is bottom-right and it opens upwards
   const [phone, setPhone] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches);
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 639px)');
@@ -174,7 +174,6 @@ export const ContactPill: React.FC<{ hidden?: boolean; onAsk?: (skillId: string,
   const [onProjects, setOnProjects] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
   const { copied, copy } = useCopy();
-  const [nudge, setNudge] = useState(false);
 
   useEffect(() => {
     const el = document.getElementById('contact');
@@ -194,35 +193,6 @@ export const ContactPill: React.FC<{ hidden?: boolean; onAsk?: (skillId: string,
   }, []);
 
   const visible = !atContact && !hidden;
-
-  // A one-time nudge: a few seconds after arriving, a small bubble asks if there is a project in mind, stays a
-  // moment and goes. Once per visit, never while the card is open.
-  useEffect(() => {
-    if (!visible) return;
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem('contact-nudged') === '1';
-    } catch {
-      /* storage can be blocked */
-    }
-    if (seen) return;
-    const show = window.setTimeout(() => {
-      setNudge(true);
-      try {
-        sessionStorage.setItem('contact-nudged', '1');
-      } catch {
-        /* ignore */
-      }
-    }, 3500);
-    const hide = window.setTimeout(() => setNudge(false), 3500 + 5500);
-    return () => {
-      window.clearTimeout(show);
-      window.clearTimeout(hide);
-    };
-  }, [visible]);
-  useEffect(() => {
-    if (open) setNudge(false);
-  }, [open]);
 
   // close on Esc, or a press outside, or when it hides
   useEffect(() => {
@@ -254,26 +224,6 @@ export const ContactPill: React.FC<{ hidden?: boolean; onAsk?: (skillId: string,
           className="fixed top-4 right-4 z-[40] flex items-start sm:top-auto sm:bottom-6 sm:right-6 sm:items-end"
         >
           <div ref={wrap} className="relative">
-          <AnimatePresence>
-            {nudge && !open && (
-              <motion.button
-                key="nudge"
-                onClick={() => {
-                  setNudge(false);
-                  setOpen(true);
-                }}
-                initial={reduce ? false : { opacity: 0, y: 8 * dir, scale: 0.94 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 6 * dir, scale: 0.96 }}
-                transition={{ duration: 0.55, ease: EASE }}
-                style={{ transformOrigin: origin }}
-                className={`absolute right-0 whitespace-nowrap ${phone ? 'top-full mt-3' : 'bottom-full mb-3'} rounded-2xl ${phone ? 'rounded-tr-sm' : 'rounded-br-sm'} bg-cream px-4 py-2.5 text-[13px] text-[#0b0b0d] shadow-[0_12px_34px_rgba(0,0,0,0.45)] cursor-pointer`}
-              >
-                Got a project in mind?
-              </motion.button>
-            )}
-          </AnimatePresence>
-
           <AnimatePresence>
             {open && (
               <motion.div
